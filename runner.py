@@ -1,14 +1,23 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import sys
 import logging
 import os
-
+import subprocess
 
 class Runner:
     def __init__(self):
         logging.debug("Runner(): Instantiated")
-        
+
+    def run_eceldnetsys():
+        logging.debug("Runner(): run_eceldnetsys() method called")
+        SCRIPT_NAME = "ECELD-Netsys.desktop"
+        ROOT = "sudo"
+        os.chdir("/home/kali/Desktop")
+        cmd = ROOT + " " + os.path.join(os.getcwd(), SCRIPT_NAME)
+        run = subprocess.run(cmd, shell=True)
+        logging.debug("Runner(): Process ran with exit code %d" %run.returncode)
+    
 
 
 
