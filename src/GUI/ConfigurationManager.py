@@ -4,7 +4,9 @@ import sys
 
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSpinBox, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSpinBox, QListWidget, QPushButton
+
+from MessageBoxs.FileListMsgBox import FileListMsgBox
 
 class ConfMng(QMainWindow):
     def __init__(self):
@@ -16,7 +18,8 @@ class ConfMng(QMainWindow):
         mainlayout = QVBoxLayout()
         layout1 = QHBoxLayout()
         layout2 = QHBoxLayout()
-        layout3 = QHBoxLayout()
+        layout3 = QVBoxLayout()
+        layout4 = QHBoxLayout()
 
         self.extract_json_data()
 
@@ -33,16 +36,23 @@ class ConfMng(QMainWindow):
         self.timesp.setMaximum(31540000) # Seconds in a year
         self.timesp.setValue(self.data['Time Range'])
 
-        continue_butt = QPushButton("Continue")
+        file_label = QLabel("Files to be Analyzed:")
 
+        self.file_list = QListWidget()
+        self.create_file_list()
+
+        continue_butt = QPushButton("Continue")
 
         layout1.addWidget(agent_name_label)
 
         layout2.addWidget(time_label)
         layout2.addWidget(self.timesp)
 
-        layout3.addStretch()
-        layout3.addWidget(continue_butt)
+        layout3.addWidget(file_label)
+        layout3.addWidget(self.file_list)
+
+        layout4.addStretch()
+        layout4.addWidget(continue_butt)
 
         mainlayout.addStretch()
         mainlayout.addLayout(layout1)
@@ -50,6 +60,8 @@ class ConfMng(QMainWindow):
         mainlayout.addLayout(layout2)
         mainlayout.addStretch()
         mainlayout.addLayout(layout3)
+        mainlayout.addStretch()
+        mainlayout.addLayout(layout4)
         mainlayout.addStretch()
 
         mainwidget.setLayout(mainlayout)
@@ -63,6 +75,20 @@ class ConfMng(QMainWindow):
         json_file.close()
         logging.debug("extract_json_data(): Complete")
 
+    def create_file_list(self):
+        logging.debug("create_file_list(): Instantiated")
+        self.file_list.insertItem(0, "File1 Location")
+        self.file_list.insertItem(1, "File2 Location")
+        self.file_list.insertItem(2, "File3 Location")
+        self.file_list.insertItem(3, "File4 Location")
+        self.file_list.insertItem(4, "File5 Location")
+        self.file_list.clicked.connect(self.list_item_clicked)
+        logging.debug("create_file_list(): Complete")
+
+    def list_item_clicked(self):
+        logging.debug("list_item_clicked(): Instantiated")
+        FileListMsgBox().create_msg_box()
+        logging.debug("list_item_clicked(): Complete")
 
 if __name__ == '__main__':
     #logging.getLogger().setLevel(logging.DEBUG)
