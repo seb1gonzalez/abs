@@ -1,6 +1,7 @@
 import logging
 import json
 import sys
+import os
 
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
@@ -69,7 +70,7 @@ class ConfMng(QMainWindow):
 
     def extract_json_data(self):
         logging.debug("extract_json_data(): Instantiated")
-        json_file = open('/root/Practicum/abs/src/Config/Config.json')
+        json_file = open(os.getcwd() + '/Config/Config.json')
         self.data = json.load(json_file)
         logging.debug(self.data)
         json_file.close()
@@ -91,12 +92,12 @@ class ConfMng(QMainWindow):
         logging.debug("list_item_clicked(): Complete")
 
 if __name__ == '__main__':
-    #logging.getLogger().setLevel(logging.DEBUG)
+    logging.getLogger().setLevel(logging.DEBUG)
     logging.debug("main(): Instantiated")
     logging.basicConfig(format='%(levelname)s:%(message)s')
     app = QApplication(sys.argv)
     ConfMngApp = ConfMng()
-    ConfMngApp.setGeometry(700, 450, 250, 300)
+    ConfMngApp.setGeometry(700, 450, 350, 300)
     ConfMngApp.show()
     app.exec_()
     logging.debug("main(): Complete")
