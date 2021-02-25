@@ -1,0 +1,1 @@
+alert tcp any any -> any any (msg: "description goes here!@# CMD-"; content:"GET / HTTP/1.1"; flags: AP;  sid:1;)
