@@ -78,17 +78,28 @@ class ConfMng(QMainWindow):
 
     def create_file_list(self):
         logging.debug("create_file_list(): Instantiated")
-        self.file_list.insertItem(0, "File1 Location")
-        self.file_list.insertItem(1, "File2 Location")
-        self.file_list.insertItem(2, "File3 Location")
-        self.file_list.insertItem(3, "File4 Location")
-        self.file_list.insertItem(4, "File5 Location")
+        files = self.find_data_files()
+        index = 0
+        while index < len(files):
+            self.file_list.insertItem(index, files[index])
+            index += 1
         self.file_list.clicked.connect(self.list_item_clicked)
         logging.debug("create_file_list(): Complete")
 
-    def list_item_clicked(self):
+    def find_data_files(self):
+        logging.debug("find_data_files(): Instantiated")
+        ret_list = []
+        for root, dirs, files in os.walk(self.data['Data Folder']):
+            for file in files:
+                if file.endswith(".JSON") or file.endswith(".json"):
+                    ret_list.append(file)
+        logging.debug(ret_list)
+        return ret_list
+        logging.debug("find_data_files(): Complete")
+
+    def list_item_clicked(self, item):
         logging.debug("list_item_clicked(): Instantiated")
-        FileListMsgBox().create_msg_box()
+        FileListMsgBox().create_msg_box(item.data())
         logging.debug("list_item_clicked(): Complete")
 
 if __name__ == '__main__':

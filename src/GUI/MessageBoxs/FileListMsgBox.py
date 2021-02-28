@@ -3,13 +3,13 @@ import logging
 from PyQt5.QtWidgets import QMessageBox
 
 class FileListMsgBox:
-    def create_msg_box(self):
+    def create_msg_box(self, item_name):
         logging.debug("create_msg_box(): Instantiated")
         msg = QMessageBox()
         msg.setWindowTitle("List File Information")
         msg.setMaximumHeight(500)
         msg.setIcon(QMessageBox.Information)
-        msg.setText("The file you have selected is: ")
+        msg.setText("The file you have selected is: " + item_name)
         msg.setInformativeText("Here you can see more details about the file you selected.")
         msg.setStandardButtons(QMessageBox.Ok)
         msg.buttonClicked.connect(self.msgbtn)
