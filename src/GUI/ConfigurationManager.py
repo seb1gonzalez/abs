@@ -9,14 +9,14 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHB
 
 from MessageBoxs.FileListMsgBox import FileListMsgBox
 
-class ConfMng(QMainWindow):
-    def __init__(self):
+class ConfMng(QWidget):
+    def __init__(self,parent):
         logging.debug("ConfMng(): Instantiated")
-        super(ConfMng, self).__init__()
-        self.setWindowTitle("Agent Build System: Configuration Manager")
-        mainwidget = QWidget()
-        self.setCentralWidget(mainwidget)
-        mainlayout = QVBoxLayout()
+        super(ConfMng, self).__init__(parent)
+        # self.setWindowTitle("Agent Build System: Configuration Manager")
+        # mainwidget = QWidget()
+        #self.addWidget(mainwidget)
+        mainlayout = QVBoxLayout(self)
         layout1 = QHBoxLayout()
         layout2 = QHBoxLayout()
         layout3 = QVBoxLayout()
@@ -64,9 +64,9 @@ class ConfMng(QMainWindow):
         mainlayout.addStretch()
         mainlayout.addLayout(layout4)
         mainlayout.addStretch()
-
-        mainwidget.setLayout(mainlayout)
+        #mainwidget.setLayout(mainlayout)
         logging.debug("ConfMng(): Complete")
+        
 
     def extract_json_data(self):
         logging.debug("extract_json_data(): Instantiated")
@@ -102,13 +102,13 @@ class ConfMng(QMainWindow):
         FileListMsgBox().create_msg_box(item.data())
         logging.debug("list_item_clicked(): Complete")
 
-if __name__ == '__main__':
-    logging.getLogger().setLevel(logging.DEBUG)
-    logging.debug("main(): Instantiated")
-    logging.basicConfig(format='%(levelname)s:%(message)s')
-    app = QApplication(sys.argv)
-    ConfMngApp = ConfMng()
-    ConfMngApp.setGeometry(700, 450, 350, 300)
-    ConfMngApp.show()
-    app.exec_()
-    logging.debug("main(): Complete")
+# if __name__ == '__main__':
+#     logging.getLogger().setLevel(logging.DEBUG)
+#     logging.debug("main(): Instantiated")
+#     logging.basicConfig(format='%(levelname)s:%(message)s')
+#     app = QApplication(sys.argv)
+#     ConfMngApp = ConfMng()
+#     ConfMngApp.setGeometry(700, 450, 350, 300)
+#     ConfMngApp.show()
+#     app.exec_()
+#     logging.debug("main(): Complete")

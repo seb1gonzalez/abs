@@ -6,15 +6,13 @@ from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QDir
 
 class DialogApp(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.resize(500,500)
-
+    def __init__(self,parent):
+        super().__init__(parent)
+        # self.resize(500,500)
+        # self.setWindowTitle("Builder: Import Module")
         self.button1 = QPushButton('Import script')
         self.button1.clicked.connect(self.get_text_file)
-
         self.textEditor = QTextEdit()
-
         layout = QVBoxLayout()
         layout.addWidget(self.button1)
         layout.addWidget(self.textEditor)
@@ -37,8 +35,8 @@ class DialogApp(QWidget):
                 pass
     
 
-if __name__=='__main__':
-    app = QApplication(sys.argv)
-    demo = DialogApp()
-    demo.show()
-    sys.exit(app.exec_())
+#  if __name__=='__main__':
+#     app = QApplication(sys.argv)
+#     demo = DialogApp()
+#     demo.show()
+#     sys.exit(app.exec_())
