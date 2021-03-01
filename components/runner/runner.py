@@ -9,7 +9,7 @@ class Runner:
     def __init__(self):
         logging.debug("Runner(): Instantiated")
 
-    def run_eceldnetsys():
+    def run_eceldnetsys(self):
         logging.debug("Runner(): run_eceldnetsys() method called")
         SCRIPT_NAME = "ECELD-Netsys.desktop"
         SCRIPT_DIR = "/home/kali/Desktop"

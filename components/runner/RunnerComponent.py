@@ -27,7 +27,7 @@ class App(QWidget):
         self.show()
 
     def on_ECELd_clicked(self):
-        Runner.run_eceldnetsys()
+        Runner.run_eceldnetsys(self)
 
     def on_button_clicked(self):
         options = QFileDialog.Options()
