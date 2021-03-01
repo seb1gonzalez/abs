@@ -1,0 +1,36 @@
+[
+	{"clicks_id" : 0,
+	"content" : "\/home\/kali\/eceld-netsys\/eceld\/plugins\/collectors\/pykeylogger\/raw\/click_images\/1604606465.0820143_main.py_root.png",
+	"type" : "point",
+	"classname" : "imgPoint",
+	"start" : "2020-11-05T20:01:05"
+	},
+
+	{"clicks_id" : 1,
+	"content" : "\/home\/kali\/eceld-netsys\/eceld\/plugins\/collectors\/pykeylogger\/raw\/click_images\/1604606465.7517178_main.py_root.png",
+	"type" : "point",
+	"classname" : "imgPoint",
+	"start" : "2020-11-05T20:01:05"
+	},
+
+	{"clicks_id" : 2,
+	"content" : "\/home\/kali\/eceld-netsys\/eceld\/plugins\/collectors\/pykeylogger\/raw\/click_images\/1604606466.7502363_main.py_root.png",
+	"type" : "point",
+	"classname" : "imgPoint",
+	"start" : "2020-11-05T20:01:06"
+	},
+
+	{"clicks_id" : 3,
+	"content" : "\/home\/kali\/eceld-netsys\/eceld\/plugins\/collectors\/pykeylogger\/raw\/click_images\/1604606450.8966389_qterminal_root.png",
+	"type" : "point",
+	"classname" : "imgPoint",
+	"start" : "2020-11-05T20:00:50"
+	},
+
+	{"clicks_id" : 4,
+	"content" : "\/home\/kali\/eceld-netsys\/eceld\/plugins\/collectors\/pykeylogger\/raw\/click_images\/1604606463.6592674_qterminal_root.png",
+	"type" : "point",
+	"classname" : "imgPoint",
+	"start" : "2020-11-05T20:01:03"
+	}
+]
