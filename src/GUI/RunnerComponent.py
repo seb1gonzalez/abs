@@ -12,7 +12,7 @@ class App(QWidget):
         self.left = 10
         self.top = 10
         self. width = 500
-        self.height = 200
+        self.height = 250
         self.initUI()
     
     def initUI(self):
@@ -53,8 +53,14 @@ class App(QWidget):
 
 
     def run_agent_clicked(self):
-        #print(cmd)
-        subprocess.run(cmd, shell=True)
+        try:
+            subprocess.run(cmd, shell=True)
+        except NameError:
+            alert = QMessageBox()
+            alert.setText('No script was specified.')
+            alert.exec()
+            print("No script was specified.")
+        
         
         
 
