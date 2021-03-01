@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import (QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog, QVBoxLayout, QPushButton)
 from runner import Runner
 import sys
 
@@ -27,7 +27,7 @@ class App(QWidget):
         self.show()
 
     def on_ECELd_clicked(self):
-        Runner.run_eceldnetsys()
+        Runner.run_eceldnetsys(self)
 
     def on_button_clicked(self):
         options = QFileDialog.Options()
@@ -43,8 +43,4 @@ class App(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = App()
-<<<<<<< HEAD
     sys.exit(app.exec_())
-=======
-    sys.exit(app.exec_())
->>>>>>> a9f7c4bef648af0f59365efef3211bef7e9c63e7
