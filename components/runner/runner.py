@@ -12,8 +12,10 @@ class Runner:
     def run_eceldnetsys():
         logging.debug("Runner(): run_eceldnetsys() method called")
         SCRIPT_NAME = "ECELD-Netsys.desktop"
+        SCRIPT_DIR = "/home/kali/Desktop"
         ROOT = "sudo"
-        os.chdir("/home/kali/Desktop")
+        
+        os.chdir(SCRIPT_DIR)
         cmd = ROOT + " " + os.path.join(os.getcwd(), SCRIPT_NAME)
         running_subprocess = subprocess.run(cmd, shell=True)
         logging.debug("Runner(): Process ran with exit code %d" %running_subprocess.returncode)

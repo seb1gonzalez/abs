@@ -43,4 +43,8 @@ class App(QWidget):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = App()
+<<<<<<< HEAD
     sys.exit(app.exec_())
+=======
+    sys.exit(app.exec_())
+>>>>>>> a9f7c4bef648af0f59365efef3211bef7e9c63e7
