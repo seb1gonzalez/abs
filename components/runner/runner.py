@@ -17,7 +17,8 @@ class Runner:
         cmd = ROOT + " " + os.path.join(os.getcwd(), SCRIPT_NAME)
         running_subprocess = subprocess.run(cmd, shell=True)
         logging.debug("Runner(): Process ran with exit code %d" %running_subprocess.returncode)
-    
+
+        
 
 
 
