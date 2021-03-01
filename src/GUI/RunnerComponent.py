@@ -1,6 +1,8 @@
-from PyQt5.QtWidgets import (QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog, QVBoxLayout, QPushButton)
+from PyQt5.QtWidgets import (QApplication, QWidget, QInputDialog, QLineEdit, QMessageBox, QFileDialog, QVBoxLayout, QPushButton)
 from Runner.Runner import Runner
 import sys
+import subprocess
+import logging
 
 class App(QWidget):
         
@@ -10,7 +12,7 @@ class App(QWidget):
         self.left = 10
         self.top = 10
         self. width = 500
-        self.height = 150
+        self.height = 200
         self.initUI()
     
     def initUI(self):
@@ -19,22 +21,42 @@ class App(QWidget):
         self.layout = QVBoxLayout()
         self.button = QPushButton('Invoke ECELd')
         self.button2 = QPushButton('Import Scripts')
+        self.button3 = QPushButton('Run Agent')
         self.layout.addWidget(self.button)
         self.layout.addWidget(self.button2)
+        self.layout.addWidget(self.button3)
         self.setLayout(self.layout)
-        self.button.clicked.connect(self.on_ECELd_clicked)
-        self.button2.clicked.connect(self.on_button_clicked)
+        self.button.clicked.connect(self.ECELd_clicked)
+        self.button2.clicked.connect(self.import_script_button_clicked)
+        self.button3.clicked.connect(self.run_agent_clicked)
         self.show()
 
-    def on_ECELd_clicked(self):
+    def ECELd_clicked(self):
+        alert = QMessageBox()
+        alert.setText('ECELd has been invoked!')
+        alert.exec()
         Runner.run_eceldnetsys(self)
 
-    def on_button_clicked(self):
+
+    def import_script_button_clicked(self):
+        global cmd
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
         fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
         if fileName:
             print(fileName)
+        alert = QMessageBox()
+        alert.setText(fileName + " has been loaded.")
+        alert.exec()
+        cmd = str(fileName)
+        print(cmd)
+
+
+    def run_agent_clicked(self):
+        #print(cmd)
+        subprocess.run(cmd, shell=True)
+        
+        
 
 
     
