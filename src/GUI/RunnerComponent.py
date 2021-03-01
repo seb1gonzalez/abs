@@ -60,12 +60,7 @@ class App(QWidget):
             alert.setText('No script was specified.')
             alert.exec()
             print("No script was specified.")
-        
-        
-        
-
-
-    
+            
 
 
 if __name__ == '__main__':
