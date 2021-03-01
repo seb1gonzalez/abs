@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import (QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog, QVBoxLayout, QPushButton)
 from runner import Runner
 import sys
 
