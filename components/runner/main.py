@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+''' 
 import logging
 import sys
 import os
@@ -19,3 +19,5 @@ if __name__ == '__main__':
     Runner.run_eceldnetsys()
 
     sys.exit(0)
+
+'''
