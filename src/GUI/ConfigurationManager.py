@@ -5,55 +5,80 @@ import os
 
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QSpinBox, QListWidget, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QSpinBox, QListWidget, QPushButton, QStyle
 
+from Dialogs.DirectoryDialog import DirectoryDialog
 from MessageBoxs.FileListMsgBox import FileListMsgBox
 
 class ConfMng(QWidget):
     def __init__(self,parent):
         logging.debug("ConfMng(): Instantiated")
         super(ConfMng, self).__init__(parent)
-        # self.setWindowTitle("Agent Build System: Configuration Manager")
-        # mainwidget = QWidget()
-        #self.addWidget(mainwidget)
         mainlayout = QVBoxLayout(self)
         layout1 = QHBoxLayout()
         layout2 = QHBoxLayout()
-        layout3 = QVBoxLayout()
-        layout4 = QHBoxLayout()
+        layout3 = QHBoxLayout()
+        layout4 = QVBoxLayout()
+        layout5 = QHBoxLayout()
 
         self.extract_json_data()
 
-        agent_name_label = QLabel("Name of Agent: " + self.data['Agent Name'])
+        agent_name_label = QLabel("Name of Agent: ")
         agent_name_label.setFont(QtGui.QFont("Times", weight = QtGui.QFont.Bold))
         agent_name_label.setAlignment(Qt.AlignLeft)
 
-        time_label = QLabel("Time Range:")
+        self.agent_name_le = QLineEdit(self.data['Agent Name'])
+        self.agent_name_le.setFont(QtGui.QFont("Times", weight = QtGui.QFont.Bold))
+        self.agent_name_le.setAlignment(Qt.AlignLeft)
+
+        time_label = QLabel("Time Range (sec.): ")
         time_label.setFont(QtGui.QFont("Times", weight = QtGui.QFont.Bold))
         time_label.setAlignment(Qt.AlignLeft)
 
         self.timesp = QSpinBox()
-        self.timesp.setAlignment(Qt.AlignRight)
+        self.timesp.setMinimumWidth(430)
+        self.timesp.setAlignment(Qt.AlignLeft)
         self.timesp.setMaximum(31540000) # Seconds in a year
         self.timesp.setValue(self.data['Time Range'])
+
+        directory_json_label = QLabel("Folder Containing JSON files: ")
+        directory_json_label.setFont(QtGui.QFont("Times", weight = QtGui.QFont.Bold))
+        directory_json_label.setAlignment(Qt.AlignLeft)
+
+        self.directory_json_le = QLineEdit(self.data['Data Folder'])
+        self.directory_json_le.setFont(QtGui.QFont("Times", weight = QtGui.QFont.Bold))
+        self.directory_json_le.setAlignment(Qt.AlignLeft)
+
+        directory_butt = QPushButton()
+        directory_butt.setIcon(self.style().standardIcon(getattr(QStyle, 'SP_DirIcon')))
+        directory_butt.clicked.connect(self.directory_chooser)
 
         file_label = QLabel("Files to be Analyzed:")
 
         self.file_list = QListWidget()
         self.create_file_list()
 
+        overwrite_butt = QPushButton("Overwrite Config File")
+        overwrite_butt.clicked.connect(self.overwrite_config_file)
+
         continue_butt = QPushButton("Continue")
 
         layout1.addWidget(agent_name_label)
+        layout1.addWidget(self.agent_name_le)
 
         layout2.addWidget(time_label)
         layout2.addWidget(self.timesp)
+        layout2.addStretch()
 
-        layout3.addWidget(file_label)
-        layout3.addWidget(self.file_list)
+        layout3.addWidget(directory_json_label)
+        layout3.addWidget(self.directory_json_le)
+        layout3.addWidget(directory_butt)
 
-        layout4.addStretch()
-        layout4.addWidget(continue_butt)
+        layout4.addWidget(file_label)
+        layout4.addWidget(self.file_list)
+
+        layout5.addWidget(overwrite_butt)
+        layout5.addWidget(continue_butt)
 
         mainlayout.addStretch()
         mainlayout.addLayout(layout1)
@@ -64,7 +89,8 @@ class ConfMng(QWidget):
         mainlayout.addStretch()
         mainlayout.addLayout(layout4)
         mainlayout.addStretch()
-        #mainwidget.setLayout(mainlayout)
+        mainlayout.addLayout(layout5)
+        mainlayout.addStretch()
         logging.debug("ConfMng(): Complete")
         
 
@@ -75,6 +101,12 @@ class ConfMng(QWidget):
         logging.debug(self.data)
         json_file.close()
         logging.debug("extract_json_data(): Complete")
+
+    def directory_chooser(self):
+        logging.debug("folder_chooser(): Instantiated")
+        dir_chosen = DirectoryDialog().directory_dialog()
+        self.folder_json_le.setText(dir_chosen)
+        logging.debug("folder_chooser(): Complete")
 
     def create_file_list(self):
         logging.debug("create_file_list(): Instantiated")
@@ -102,13 +134,22 @@ class ConfMng(QWidget):
         FileListMsgBox().create_msg_box(item.data())
         logging.debug("list_item_clicked(): Complete")
 
-# if __name__ == '__main__':
-#     logging.getLogger().setLevel(logging.DEBUG)
-#     logging.debug("main(): Instantiated")
-#     logging.basicConfig(format='%(levelname)s:%(message)s')
-#     app = QApplication(sys.argv)
-#     ConfMngApp = ConfMng()
-#     ConfMngApp.setGeometry(700, 450, 350, 300)
-#     ConfMngApp.show()
-#     app.exec_()
-#     logging.debug("main(): Complete")
+    def overwrite_config_file(self):
+        logging.debug("overwrite_config_file(): Instantiated")
+        self.data['Agent Name'] = self.agent_name_le.text()
+        self.data['Time Range'] = self.timesp.value()
+        self.data['Data Folder'] = self.directory_json_le.text()
+        with open(os.getcwd() + '/Config/Config.json', 'w') as outfile:
+            json.dump(self.data, outfile, ensure_ascii=False, indent=4)
+        logging.debug("overwrite_config_file(): Complete")
+
+""" if __name__ == '__main__':
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.debug("main(): Instantiated")
+    logging.basicConfig(format='%(levelname)s:%(message)s')
+    app = QApplication(sys.argv)
+    ConfMngApp = ConfMng()
+    ConfMngApp.setGeometry(700, 450, 350, 300)
+    ConfMngApp.show()
+    app.exec_()
+    logging.debug("main(): Complete") """
