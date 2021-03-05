@@ -7,6 +7,7 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QSpinBox, QListWidget, QPushButton, QStyle
 
+from Causal_Extractor.RelationshipExtractor import RelationshipExtractor
 from Dialogs.DirectoryDialog import DirectoryDialog
 from MessageBoxs.FileListMsgBox import FileListMsgBox
 
@@ -21,6 +22,7 @@ class ConfMng(QWidget):
         layout4 = QVBoxLayout()
         layout5 = QHBoxLayout()
 
+        self.files = []
         self.extract_json_data()
 
         agent_name_label = QLabel("Name of Agent: ")
@@ -31,12 +33,12 @@ class ConfMng(QWidget):
         self.agent_name_le.setFont(QtGui.QFont("Times", weight = QtGui.QFont.Bold))
         self.agent_name_le.setAlignment(Qt.AlignLeft)
 
-        time_label = QLabel("Time Range (sec.): ")
+        time_label = QLabel("Time Delta (sec.): ")
         time_label.setFont(QtGui.QFont("Times", weight = QtGui.QFont.Bold))
         time_label.setAlignment(Qt.AlignLeft)
 
         self.timesp = QSpinBox()
-        self.timesp.setMinimumWidth(430)
+        self.timesp.setMinimumWidth(200)
         self.timesp.setAlignment(Qt.AlignLeft)
         self.timesp.setMaximum(31540000) # Seconds in a year
         self.timesp.setValue(self.data['Time Range'])
@@ -61,7 +63,8 @@ class ConfMng(QWidget):
         overwrite_butt = QPushButton("Overwrite Config File")
         overwrite_butt.clicked.connect(self.overwrite_config_file)
 
-        continue_butt = QPushButton("Continue")
+        extract_butt = QPushButton("Start Relationship Extraction")
+        extract_butt.clicked.connect(self.relationship_extraction)
 
         layout1.addWidget(agent_name_label)
         layout1.addWidget(self.agent_name_le)
@@ -78,7 +81,7 @@ class ConfMng(QWidget):
         layout4.addWidget(self.file_list)
 
         layout5.addWidget(overwrite_butt)
-        layout5.addWidget(continue_butt)
+        layout5.addWidget(extract_butt)
 
         mainlayout.addStretch()
         mainlayout.addLayout(layout1)
@@ -96,7 +99,7 @@ class ConfMng(QWidget):
 
     def extract_json_data(self):
         logging.debug("extract_json_data(): Instantiated")
-        json_file = open(os.getcwd() + '/Config/Config.json')
+        json_file = open(os.getcwd() + '/Config/Config.JSON')
         self.data = json.load(json_file)
         logging.debug(self.data)
         json_file.close()
@@ -110,10 +113,10 @@ class ConfMng(QWidget):
 
     def create_file_list(self):
         logging.debug("create_file_list(): Instantiated")
-        files = self.find_data_files()
+        self.files = self.find_data_files()
         index = 0
-        while index < len(files):
-            self.file_list.insertItem(index, files[index])
+        while index < len(self.files):
+            self.file_list.insertItem(index, self.files[index])
             index += 1
         self.file_list.clicked.connect(self.list_item_clicked)
         logging.debug("create_file_list(): Complete")
@@ -124,7 +127,7 @@ class ConfMng(QWidget):
         for root, dirs, files in os.walk(self.data['Data Folder']):
             for file in files:
                 if file.endswith(".JSON") or file.endswith(".json"):
-                    ret_list.append(file)
+                    ret_list.append(os.path.abspath(os.path.join(root, file)))  # Causes warning, but doesn't affect performance
         logging.debug(ret_list)
         return ret_list
         logging.debug("find_data_files(): Complete")
@@ -139,9 +142,14 @@ class ConfMng(QWidget):
         self.data['Agent Name'] = self.agent_name_le.text()
         self.data['Time Range'] = self.timesp.value()
         self.data['Data Folder'] = self.directory_json_le.text()
-        with open(os.getcwd() + '/Config/Config.json', 'w') as outfile:
+        with open(os.getcwd() + '/Config/Config.JSON', 'w') as outfile:
             json.dump(self.data, outfile, ensure_ascii=False, indent=4)
         logging.debug("overwrite_config_file(): Complete")
+
+    def relationship_extraction(self):
+        logging.debug("relationship_extraction(): Instantiated")
+        RelationshipExtractor().extract_relationships(self.files, self.timesp.value())
+        logging.debug("relationship_extraction(): Complete")
 
 """ if __name__ == '__main__':
     logging.getLogger().setLevel(logging.DEBUG)
