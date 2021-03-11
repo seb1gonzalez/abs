@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from ConfigurationManager import ConfMng
-from se import DialogApp
+from Builder.se import DialogApp
 from RunnerComponent import RunnerApp
 
 class tabdemo(QTabWidget):

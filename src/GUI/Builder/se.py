@@ -1,5 +1,6 @@
 import json
 from JSONTREE.qjsonmodel import QJsonModel
+
 import sys
 
 from PyQt5.QtCore import Qt
