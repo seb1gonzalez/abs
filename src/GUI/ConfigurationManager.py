@@ -99,7 +99,9 @@ class ConfMng(QWidget):
 
     def extract_json_data(self):
         logging.debug("extract_json_data(): Instantiated")
-        json_file = open(os.getcwd() + '/Config/Config.JSON')
+       # json_file = open(os.getcwd() + '/Config/Config.JSON')
+        json_file = open('../Config/Config.JSON')
+
         self.data = json.load(json_file)
         logging.debug(self.data)
         json_file.close()
