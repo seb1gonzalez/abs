@@ -9,7 +9,7 @@ from RunnerComponent import RunnerApp
 class tabdemo(QTabWidget):
    def __init__(self, parent = None):
       super(tabdemo, self).__init__(parent)
-      self.setGeometry(100, 100, 600,400)
+      self.setGeometry(100, 100, 1200,800)
       self.tab1 = QWidget()
       self.tab2 = QWidget()
       self.tab3 = QWidget()
