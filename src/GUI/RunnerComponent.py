@@ -64,7 +64,7 @@ class RunnerApp(QWidget):
         alert = QMessageBox()
         alert.setText('ECELd has been invoked!')
         alert.exec()
-        Runner.run_eceldnetsys(self)
+        Runner.run_eceld(self)
 
 
     def set_script_name(self):
@@ -84,6 +84,7 @@ class RunnerApp(QWidget):
         cmd = str(fileName)
         print(cmd)
         self.set_script_name()
+        self.update_log_window("\nDEBUG:root:RunnerComponent.py(): Script Added.")
 
 
     def run_agent_clicked(self):
@@ -96,9 +97,20 @@ class RunnerApp(QWidget):
             print("No script was specified.")
 
     def open_log_file(self):
+        global content
         f = open('/home/kali/Desktop/abs/src/GUI/Runner/logs.txt', 'r')
         content = f.read()
+        f.close()
         return content
+
+    def update_log_window(self, msg):
+        f = open('/home/kali/Desktop/abs/src/GUI/Runner/logs.txt', 'a')
+        f.write(msg)
+        f.close()
+        self.open_log_file()
+        self.log.setPlainText(content)
+
+
     
     
 

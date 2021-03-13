@@ -9,10 +9,10 @@ class Runner:
     def __init__(self):
         logging.debug("Runner(): Instantiated")
 
-    def run_eceldnetsys(self):
-        logging.debug("Runner(): run_eceldnetsys() method called")
-        SCRIPT_NAME = "ECELD-Netsys.desktop"
-        SCRIPT_DIR = "/home/kali/Desktop"
+    def run_eceld(self):
+        logging.debug("Runner(): run_eceld() method called")
+        SCRIPT_NAME = "eceld_service"
+        SCRIPT_DIR = "/home/kali/Desktop/eceld"
         ROOT = "sudo"
         
         os.chdir(SCRIPT_DIR)
