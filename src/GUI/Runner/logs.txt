@@ -4,4 +4,3 @@ DEBUG:root:addProjectItem(): retranslateUi(): instantiated
 DEBUG:root:addprojectItem(): retranslateUi(): Completed
 DEBUG:root:addProjectItem(): retranslateUi(): instantiated
 DEBUG:root:addprojectItem(): retranslateUi(): Completed
-DEBUG:root:RunnerComponent.py(): Script Added.
