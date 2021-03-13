@@ -48,7 +48,6 @@ class RunnerApp(QWidget):
 
         self.logwindow = QVBoxLayout()
         self.log = QPlainTextEdit()
-        self.log.setFixedWidth(300)
         self.log.setReadOnly(True)
         self.log.moveCursor(QTextCursor.End)
         content = self.open_log_file()
@@ -132,11 +131,6 @@ class RunnerApp(QWidget):
         alert.setText(msg)
         alert.exec()
         self.update_log_window("\nDEBUG:root:RunnerComponent.py(): "+msg)
-
-
-
-    
-    
 
 
 # if __name__ == '__main__':
