@@ -38,7 +38,7 @@ class RunnerApp(QWidget):
         self.run.addStretch(1)
         self.button3 = QPushButton('Run Agent')
         self.button3.setFixedSize(100,30)
-        self.run.addWidget(self.button3)
+        self.run.addWidget(self.button3) 
 
         self.logwindow = QVBoxLayout()
         self.log = QPlainTextEdit()
