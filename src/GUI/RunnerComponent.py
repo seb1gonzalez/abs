@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import (QApplication, QWidget, QInputDialog, QLineEdit, QLabel, QMessageBox, QFileDialog, QVBoxLayout, QGridLayout, QHBoxLayout, QPushButton, QPlainTextEdit)
+from PyQt5.QtGui import QTextCursor
 from Runner.Runner import Runner
 import sys
 import subprocess
@@ -49,6 +50,7 @@ class RunnerApp(QWidget):
         self.log = QPlainTextEdit()
         self.log.setFixedWidth(300)
         self.log.setReadOnly(True)
+        self.log.moveCursor(QTextCursor.End)
         content = self.open_log_file()
         self.log.setPlainText(content)
         self.logwindow.addWidget(self.log)
@@ -109,6 +111,7 @@ class RunnerApp(QWidget):
         f.close()
         self.open_log_file()
         self.log.setPlainText(content)
+        self.log.moveCursor(QTextCursor.End)
 
     def clear_loaded_script(self):
         global cmd
@@ -122,7 +125,7 @@ class RunnerApp(QWidget):
                 self.update_log_window("\nDEBUG:root:RunnerComponent.py(): Script Removed.")
         except (NameError, TypeError):
             self.display_alert('Nothing to clear.')
-            
+
 
     def display_alert(self, msg):
         alert = QMessageBox()
