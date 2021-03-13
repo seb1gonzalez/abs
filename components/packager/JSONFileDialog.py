@@ -5,6 +5,6 @@ class JSONFileDialog:
     def json_dialog(self):
         logging.info('json_dialog(): Instantiated')
         widget = QFileDialog()
-        filename, _ = QFileDialog.getOpenFileNames(widget, "Choose a JSON file", "", "JSON Files (*.JSON)")
+        filename, _ = QFileDialog.getOpenFileNames(widget, "Choose a file", "", "All Files (*)")
         return filename[0]
         logging.info('json_dialog(): Completed')
