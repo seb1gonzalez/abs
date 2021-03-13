@@ -20,7 +20,6 @@ class RunnerApp(QWidget):
         self.initUI()
     
     def initUI(self):
-
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
         
@@ -71,11 +70,11 @@ class RunnerApp(QWidget):
         self.display_alert('ECELd has been invoked!')
         Runner.run_eceld(self)
 
-
+    #helper fuction to set script name on gui
     def set_script_name(self, cmd):
         self.scriptlabel.setText("Script: "+ cmd)
 
-
+    #import script
     def import_script_button_clicked(self):
         global cmd
         options = QFileDialog.Options()
@@ -89,7 +88,7 @@ class RunnerApp(QWidget):
         self.set_script_name(cmd)
         self.update_log_window("\nDEBUG:root:RunnerComponent.py(): Script Added.")
 
-
+    #run agent
     def run_agent_clicked(self):
         try:
             subprocess.run(cmd, shell=True)
@@ -97,6 +96,7 @@ class RunnerApp(QWidget):
             self.display_alert('No script was specified.')
 
 
+    #initialize or grab preexisting log history
     def open_log_file(self):
         global content
         f = open('/home/kali/Desktop/abs/src/GUI/Runner/logs.txt', 'r')
@@ -104,6 +104,7 @@ class RunnerApp(QWidget):
         f.close()
         return content
 
+    #appends each log to log history
     def update_log_window(self, msg):
         f = open('/home/kali/Desktop/abs/src/GUI/Runner/logs.txt', 'a')
         f.write(msg)
@@ -112,6 +113,7 @@ class RunnerApp(QWidget):
         self.log.setPlainText(content)
         self.log.moveCursor(QTextCursor.End)
 
+    #clears loaded script
     def clear_loaded_script(self):
         global cmd
         try:
@@ -125,7 +127,7 @@ class RunnerApp(QWidget):
         except (NameError, TypeError):
             self.display_alert('Nothing to clear.')
 
-
+    #display message box alert
     def display_alert(self, msg):
         alert = QMessageBox()
         alert.setText(msg)

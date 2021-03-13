@@ -10,3 +10,7 @@ DEBUG:root:RunnerComponent.py(): No script was specified.
 DEBUG:root:RunnerComponent.py(): Script has already been cleared.
 DEBUG:root:RunnerComponent.py(): /home/kali/Desktop/abs/src/GUI/Runner/sample.exp has been loaded.
 DEBUG:root:RunnerComponent.py(): Script Added.
+DEBUG:root:RunnerComponent.py(): /home/kali/Desktop/abs/src/GUI/Runner/sample.exp has been loaded.
+DEBUG:root:RunnerComponent.py(): Script Added.
+DEBUG:root:RunnerComponent.py(): Script Removed.
+DEBUG:root:RunnerComponent.py(): Script has already been cleared.
