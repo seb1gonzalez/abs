@@ -1,0 +1,8 @@
+DEBUG:root:addProjectItem(): retranslateUi(): instantiated
+DEBUG:root:addprojectItem(): retranslateUi(): Completed
+DEBUG:root:addProject(): OK pressed and valid configname entered: test1
+DEBUG:root:addProjectItem(): retranslateUi(): instantiated
+DEBUG:root:addprojectItem(): retranslateUi(): Completed
+DEBUG:root:addProject(): OK pressed and valid configname entered: demo2
+DEBUG:root:addProjectItem(): retranslateUi(): instantiated
+DEBUG:root:addprojectItem(): retranslateUi(): Completed
