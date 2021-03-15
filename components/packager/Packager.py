@@ -9,7 +9,7 @@ import zipfile
 from PyQt5.QtGui import *
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
-from JSONFileDialog import JSONFileDialog
+from JFileDialog import JFileDialog
 
 list = [] #filenames to display in import
 list2 = [] #filenames to display in export
@@ -29,13 +29,13 @@ class ImportWindow(QWidget):
         self.pbar.setGeometry(130, 25, 150, 50)
         self.pushButton = QPushButton("Choose File", self)
         self.pushButton.move(125,100)
-        self.label1 = QLabel("hhhh", self)
+        self.label1 = QLabel("", self)
         self.label1.setFixedWidth(10000)
         self.label1.move(30, 150)
         self.pushButton.clicked.connect(self.actionButton2)
 
     def actionButton2(self):
-        file_chosen = JSONFileDialog().json_dialog() #file select
+        file_chosen = JFileDialog().json_dialog() #file select
         for i in range(101): #progress bar
             time.sleep(0.05)
             self.pbar.setValue(i)
@@ -85,7 +85,7 @@ class ExportWindow(QWidget):
         output.close()
 
     def actionButton2(self):
-        file_chosen = JSONFileDialog().json_dialog()
+        file_chosen = JFileDialog().json_dialog()
         for i in range(101):
             time.sleep(0.05)
             self.pbar2.setValue(i)
