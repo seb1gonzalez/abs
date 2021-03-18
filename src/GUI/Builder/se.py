@@ -10,44 +10,37 @@ from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QMenuBar, QMenu, 
 from PyQt5.QtGui import QPixmap, QStandardItemModel, QStandardItem
 from PyQt5.QtCore import QDir
 from Builder.CasualRelationship import CasualRelationship
-#from BuilderTreeView import TreeviewBuilder
+# from BuilderTreeView import TreeviewBuilder
 
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
+
 class DialogApp(QWidget):
-    def __init__(self,parent):
+    def __init__(self, parent):
         super().__init__(parent)
         try:
-            # self.scroll = QScrollArea()
-            #self.layout = QVBoxLayout()
-
-            # # Scroll Area Properties
-            # self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-            # self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-            # self.scroll.setWidgetResizable(True)
-            # self.scroll.setWidget(self)
 
             self.button_import = QPushButton("Import")
             self.button_save = QPushButton("Save")
             self.button_undo = QPushButton("Undo")
 
             self.dropdown = QComboBox()
-            self.dropdown.addItems(["Network","Mouse-Clicks","Keystrokes"])
-            #self.dropdown.addItem("Network")
-            #self.dropdown.addItem("Mouse-Clicks")
-            #self.dropdown.addItem("Keystrokes")
+            self.dropdown.addItems(["Network", "Mouse-Clicks", "Keystrokes"])
+            # self.dropdown.addItem("Network")
+            # self.dropdown.addItem("Mouse-Clicks")
+            # self.dropdown.addItem("Keystrokes")
 
             self.hbox = QHBoxLayout()
             self.vbox = QVBoxLayout()
-            
+
             self.hbox.addWidget(self.button_import)
             self.hbox.addWidget(self.button_save)
             self.hbox.addWidget(self.button_undo)
             self.hbox.addWidget(self.dropdown)
-            #self.setLayout(self.hbox)
-            
+            self.hbox.setAlignment(Qt.AlignTop)
+
             self.vbox.addLayout(self.hbox)
             self.setLayout(self.vbox)
 
@@ -60,9 +53,6 @@ class DialogApp(QWidget):
         except Exception:
             traceback.print_exc()
 
-
-
-
     def get_text_file(self):
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.AnyFile)
@@ -70,35 +60,26 @@ class DialogApp(QWidget):
         dialog.setNameFilter(("JSON (*.json *.JSON)"))
         if dialog.exec_():
             file_name = dialog.selectedFiles()
-            if file_name[0].endswith(('.json','.JSON')):
-                with open(file_name[0]) as json_file:  # Opens any file in the JSON format / Abre el JSON file y lo guarda como 'json_file'
-                    document:dict = json.load(json_file)
-                    print(document)
-                    index = 1
-                    try:
-
+            if file_name[0].endswith(('.json', '.JSON')):
+                # Opens any file in the JSON format / Abre el JSON file y lo guarda como 'json_file'
+                with open(file_name[0]) as json_file:
+                    document: dict = json.load(json_file)
+                    try:  
+                        index = 0      
                         for i in range(len(document)):
-
                             data = document[i]
                             json_model = QJsonModel()
                             json_tree_view = QTreeView()
                             json_tree_view.setModel(json_model)
                             json_model.load(data)
-
                             casual_relationship = CasualRelationship(json_tree_view)
-                            casual_relationship.setMinimumSize(1100,200)
+                            casual_relationship.setMinimumSize(1100, 200)
                             self.vbox.addWidget(casual_relationship)
-
-                            index += 1
-                            if index == 5:
-                                 break
-                            print("Total items: ", index)
-
-
-
+                            index+=1
+                            if index == 3:
+                                break
                     except Exception:
                         traceback.print_exc()
-
                     json_file.close()
 
             else:
