@@ -17,7 +17,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
 
-class DialogApp(QWidget):
+class Builder(QWidget):
     def __init__(self, parent):
         super().__init__(parent)
         try:
@@ -65,7 +65,13 @@ class DialogApp(QWidget):
                 with open(file_name[0]) as json_file:
                     document: dict = json.load(json_file)
                     try:  
-                        index = 0      
+                        index = 1
+                          
+                        scrollWidget = QScrollBar()
+                        scrollWidget.setMinimumHeight(500)
+                        self.vbox.addWidget(scrollWidget)
+                 
+                        
                         for i in range(len(document)):
                             data = document[i]
                             json_model = QJsonModel()
@@ -73,11 +79,11 @@ class DialogApp(QWidget):
                             json_tree_view.setModel(json_model)
                             json_model.load(data)
                             casual_relationship = CasualRelationship(json_tree_view)
-                            casual_relationship.setMinimumSize(1100, 200)
                             self.vbox.addWidget(casual_relationship)
-                            index+=1
-                            if index == 3:
-                                break
+                       
+                            
+                            # if index == 3:
+                            #     break
                     except Exception:
                         traceback.print_exc()
                     json_file.close()
