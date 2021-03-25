@@ -1,6 +1,6 @@
 [
     {
-        "start": "2020-11-05 20:00:53",
+        "start": "2020-11-05 20:00:53.000000",
         "y": 41,
         "Artifact_id": 0,
         "Artifact_Relationships": [
@@ -13,7 +13,7 @@
         ]
     },
     {
-        "start": "2020-11-05 20:00:56",
+        "start": "2020-11-05 20:00:56.000000",
         "y": 57,
         "Artifact_id": 1,
         "Artifact_Relationships": [
@@ -30,7 +30,7 @@
         ]
     },
     {
-        "start": "2020-11-05 20:00:57",
+        "start": "2020-11-05 20:00:57.000000",
         "y": 13,
         "Artifact_id": 2,
         "Artifact_Relationships": [
@@ -49,7 +49,7 @@
     {
         "content": "41 p/s",
         "title": "eth:ethertype:ip:tcp:http:data:data-text-lines  52:54:00:12:35:02 08:00:27:23:ff:90 172.217.1.228 10.0.2.15 80 50084 0x00000018\neth:ethertype:ip:tcp:http  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 172.217.1.142 43282 80 0x00000018\neth:ethertype:ip:tcp:http:data-text-lines  52:54:00:12:35:02 08:00:27:23:ff:90 172.217.1.142 10.0.2.15 80 43282 0x00000018\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 172.217.1.228 50084 80 0x00000011\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 172.217.1.228 50084 80 0x00000010\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 172.217.1.142 43282 80 0x00000011\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 172.217.1.142 43282 80 0x00000010\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 172.217.1.228 10.0.2.15 80 50084 0x00000018\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 172.217.1.142 43282 80 0x00000002\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 172.217.1.228 10.0.2.15 80 50084 0x00000012\neth:ethertype:ip:tcp:http  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 172.217.1.228 50084 80 0x00000018\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 172.217.1.228 10.0.2.15 80 50084 0x00000010\neth:ethertype:ip:udp:dns  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 192.168.1.1 36359 53\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 172.217.1.228 10.0.2.15 80 50084 0x00000011\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 172.217.1.142 10.0.2.15 80 43282 0x00000010\neth:ethertype:ip:udp:dns  52:54:00:12:35:02 08:00:27:23:ff:90 192.168.1.1 10.0.2.15 53 59578\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 172.217.1.228 50084 80 0x00000002\neth:ethertype:ip:udp:dns  52:54:00:12:35:02 08:00:27:23:ff:90 192.168.1.1 10.0.2.15 53 36359\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 172.217.1.142 10.0.2.15 80 43282 0x00000012\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 172.217.1.142 10.0.2.15 80 43282 0x00000011\neth:ethertype:ip:udp:dns  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 192.168.1.1 59578 53\n",
-        "start": "2020-11-05 20:00:53",
+        "start": "2020-11-05 20:00:53.000000",
         "Artifact_id": 3,
         "Artifact_Relationships": [
             11,
@@ -62,7 +62,7 @@
     {
         "content": "57 p/s",
         "title": "eth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 80 36230 0x00000018\neth:ethertype:ip:tcp:tls:tls  52:54:00:12:35:02 08:00:27:23:ff:90 65.8.222.9 10.0.2.15 443 47034 0x00000018\neth:ethertype:ip:tcp:http  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 176.32.103.205 36230 80 0x00000018\neth:ethertype:ip:tcp:tls  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 65.8.222.9 47034 443 0x00000018\neth:ethertype:ip:tcp:tls:x509sat:x509sat:x509sat:x509sat:x509sat:x509sat:x509sat:x509sat:x509ce:x509ce:x509ce:x509ce:x509ce:x509ce:x509ce:pkix1explicit:pkix1implicit:x509ce:tls:x509sat:x509sat:x509sat:x509sat:x509sat:x509sat:x509sat:x509ce:x509ce:pkix1implicit:x509ce:x509ce:pkix1explicit:x509ce:x509ce:x509sat:x509sat:x509sat:x509sat:x509sat:x509sat:x509sat:x509sat:x509sat:x509ce:x509ce:x509ce:pkix1explicit:pkix1implicit:x509ce:x509ce:pkix1implicit:x509ce:tls:ocsp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 443 41912 0x00000018\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 176.32.103.205 36230 80 0x00000002\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 176.32.103.205 36230 80 0x00000010\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 80 36230 0x00000011\neth:ethertype:ip:udp:dns  52:54:00:12:35:02 08:00:27:23:ff:90 192.168.1.1 10.0.2.15 53 33231\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 443 41912 0x00000012\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 443 41912 0x00000010\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 65.8.222.9 47034 443 0x00000002\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 65.8.222.9 10.0.2.15 443 47034 0x00000012\neth:ethertype:ip:tcp:tls:tls  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 443 41912 0x00000018\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 65.8.222.9 47034 443 0x00000010\neth:ethertype:ip:udp:dns  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 192.168.1.1 41301 53\neth:ethertype:ip:udp:dns  52:54:00:12:35:02 08:00:27:23:ff:90 192.168.1.1 10.0.2.15 53 41301\neth:ethertype:ip:udp:dns  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 192.168.1.1 33231 53\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 176.32.103.205 41912 443 0x00000002\neth:ethertype:ip:tcp:tls  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 443 41912 0x00000018\neth:ethertype:ip:tcp:tls  52:54:00:12:35:02 08:00:27:23:ff:90 65.8.222.9 10.0.2.15 443 47034 0x00000018\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 80 36230 0x00000010\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 176.32.103.205 41912 443 0x00000010\neth:ethertype:ip:tcp:tls  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 176.32.103.205 41912 443 0x00000018\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 176.32.103.205 36230 80 0x00000011\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 80 36230 0x00000012\neth:ethertype:ip:tcp:http:data-text-lines  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 80 36230 0x00000018\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 443 41912 0x00000018\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 65.8.222.9 10.0.2.15 443 47034 0x00000010\n",
-        "start": "2020-11-05 20:00:56",
+        "start": "2020-11-05 20:00:56.000000",
         "Artifact_id": 4,
         "Artifact_Relationships": [
             5,
@@ -77,7 +77,7 @@
     {
         "content": "13 p/s",
         "title": "eth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 65.8.222.9 10.0.2.15 443 47034 0x00000011\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 443 41912 0x00000011\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 65.8.222.9 47034 443 0x00000011\neth:ethertype:ip:tcp:tls  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 65.8.222.9 47034 443 0x00000018\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 176.32.103.205 41912 443 0x00000011\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 176.32.103.205 10.0.2.15 443 41912 0x00000010\neth:ethertype:ip:tcp  08:00:27:23:ff:90 52:54:00:12:35:02 10.0.2.15 65.8.222.9 47034 443 0x00000010\neth:ethertype:ip:tcp:tls  52:54:00:12:35:02 08:00:27:23:ff:90 65.8.222.9 10.0.2.15 443 47034 0x00000018\neth:ethertype:ip:tcp  52:54:00:12:35:02 08:00:27:23:ff:90 65.8.222.9 10.0.2.15 443 47034 0x00000010\n",
-        "start": "2020-11-05 20:00:57",
+        "start": "2020-11-05 20:00:57.000000",
         "Artifact_id": 5,
         "Artifact_Relationships": [
             11,
@@ -91,7 +91,7 @@
     },
     {
         "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/timed_screenshots/1604606461.0876677_screenshot.png",
-        "start": "2020-11-05 20:01:01",
+        "start": "2020-11-05 20:01:01.000000",
         "Artifact_id": 6,
         "Artifact_Relationships": [
             7,
@@ -106,7 +106,7 @@
     },
     {
         "content": "[Control_L][Shift_L]Twget google.com[Return]wget amazon.com[Return]whoami[Return]exit[Return][Alt_L]",
-        "start": "2020-11-05 20:01:00",
+        "start": "2020-11-05 20:01:00.000000",
         "Artifact_id": 7,
         "Artifact_Relationships": [
             11,
@@ -120,7 +120,7 @@
     },
     {
         "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606465.0820143_main.py_root.png",
-        "start": "2020-11-05 20:01:05",
+        "start": "2020-11-05 20:01:05.000000",
         "Artifact_id": 8,
         "Artifact_Relationships": [
             9,
@@ -147,7 +147,7 @@
     },
     {
         "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606465.7517178_main.py_root.png",
-        "start": "2020-11-05 20:01:05",
+        "start": "2020-11-05 20:01:05.000000",
         "Artifact_id": 9,
         "Artifact_Relationships": [
             10,
@@ -173,7 +173,7 @@
     },
     {
         "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606466.7502363_main.py_root.png",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 10,
         "Artifact_Relationships": [
             11,
@@ -198,7 +198,7 @@
     },
     {
         "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606450.8966389_qterminal_root.png",
-        "start": "2020-11-05 20:00:50",
+        "start": "2020-11-05 20:00:50.000000",
         "Artifact_id": 11,
         "Artifact_Relationships": [
             13,
@@ -208,7 +208,7 @@
     },
     {
         "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606463.6592674_qterminal_root.png",
-        "start": "2020-11-05 20:01:03",
+        "start": "2020-11-05 20:01:03.000000",
         "Artifact_id": 12,
         "Artifact_Relationships": [
             13,
@@ -221,7 +221,7 @@
     },
     {
         "content": "bash",
-        "start": "2020-11-05 20:00:51",
+        "start": "2020-11-05 20:00:51.000000",
         "Artifact_id": 13,
         "Artifact_Relationships": [
             14,
@@ -230,7 +230,7 @@
     },
     {
         "content": "tput setaf 1",
-        "start": "2020-11-05 20:00:51",
+        "start": "2020-11-05 20:00:51.000000",
         "Artifact_id": 14,
         "Artifact_Relationships": [
             15
@@ -238,31 +238,31 @@
     },
     {
         "content": "dircolors -b",
-        "start": "2020-11-05 20:00:51",
+        "start": "2020-11-05 20:00:51.000000",
         "Artifact_id": 15,
         "Artifact_Relationships": []
     },
     {
         "content": "wget google.com",
-        "start": "2020-11-05 20:00:53",
+        "start": "2020-11-05 20:00:53.000000",
         "Artifact_id": 16,
         "Artifact_Relationships": []
     },
     {
         "content": "wget amazon.com",
-        "start": "2020-11-05 20:00:56",
+        "start": "2020-11-05 20:00:56.000000",
         "Artifact_id": 17,
         "Artifact_Relationships": []
     },
     {
         "content": "whoami",
-        "start": "2020-11-05 20:00:58",
+        "start": "2020-11-05 20:00:58.000000",
         "Artifact_id": 18,
         "Artifact_Relationships": []
     },
     {
         "content": "service /usr/sbin/service auditd stop",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 19,
         "Artifact_Relationships": [
             20,
@@ -278,7 +278,7 @@
     },
     {
         "content": "basename /usr/sbin/service",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 20,
         "Artifact_Relationships": [
             21,
@@ -293,7 +293,7 @@
     },
     {
         "content": "basename /usr/sbin/service",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 21,
         "Artifact_Relationships": [
             22,
@@ -307,7 +307,7 @@
     },
     {
         "content": "systemctl --quiet is-active multi-user.target",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 22,
         "Artifact_Relationships": [
             23,
@@ -320,7 +320,7 @@
     },
     {
         "content": "systemctl list-unit-files --full multi-user.target",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 23,
         "Artifact_Relationships": [
             24,
@@ -332,7 +332,7 @@
     },
     {
         "content": "sed -ne s/\\.socket\\s*[a-z]*\\s*$/.socket/p",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 24,
         "Artifact_Relationships": [
             25,
@@ -343,7 +343,7 @@
     },
     {
         "content": "xhost -SI:localuser:root",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 25,
         "Artifact_Relationships": [
             26,
@@ -353,7 +353,7 @@
     },
     {
         "content": "auditd_parser.s bash /home/kali/eceld-netsys/eceld/plugins/parsers/auditd/auditd_parser.sh /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/raw /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/parsed",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 26,
         "Artifact_Relationships": [
             27,
@@ -362,7 +362,7 @@
     },
     {
         "content": "bash /home/kali/eceld-netsys/eceld/plugins/parsers/auditd/auditd_parser.sh /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/raw /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/parsed",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 27,
         "Artifact_Relationships": [
             28
@@ -370,7 +370,7 @@
     },
     {
         "content": "cat /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/raw/1604606450_auditd.txt",
-        "start": "2020-11-05 20:01:06",
+        "start": "2020-11-05 20:01:06.000000",
         "Artifact_id": 28,
         "Artifact_Relationships": []
     }

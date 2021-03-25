@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QFileDialog, QWidget
 import logging
 
 class DirectoryDialog:
-    def directory_dialog(self):
+    def directory_dialog(QWidget):
         logging.info('directory_dialog(): Instantiated')
         widget = QFileDialog()
         foldername = str(QFileDialog.getExistingDirectory(widget, "Select Directory Containing JSON Files"))

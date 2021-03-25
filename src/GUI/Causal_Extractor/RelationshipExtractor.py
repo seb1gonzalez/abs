@@ -6,6 +6,7 @@ import os
 class RelationshipExtractor:
     def extract_relationships(self, files, delta_time):
         logging.debug("extract_relationships(): Instantiated")
+        delta_time = [int(value) for value in delta_time]
         artifact_list = self.retrieve_json_data(files)
         artifact_list = self.restructure_artifacts(artifact_list)
         relationship_list, relationship_tracker = self.find_relationships(artifact_list, delta_time)
@@ -51,8 +52,10 @@ class RelationshipExtractor:
                     print('A new dissector has been identified (' + temp_key + '), and requires implementation.')
                 del artifact_list[index1][index2][temp_key]
                 artifact_list[index1][index2]['start'] = artifact_list[index1][index2]['start'].replace('T', ' ')
-                #artifact_list[index1][index2]['start'] = dt.datetime.strptime(artifact_list[index1][index2]['start'], '%Y-%m-%d %H:%M:%S.%f') # If time contains milliseconds
-                artifact_list[index1][index2]['start'] = dt.datetime.strptime(artifact_list[index1][index2]['start'], '%Y-%m-%d %H:%M:%S')  # If time only has up to seconds
+                try:
+                    artifact_list[index1][index2]['start'] = dt.datetime.strptime(artifact_list[index1][index2]['start'], '%Y-%m-%d %H:%M:%S.%f') # If time contains milliseconds
+                except:
+                    artifact_list[index1][index2]['start'] = dt.datetime.strptime(artifact_list[index1][index2]['start'], '%Y-%m-%d %H:%M:%S')  # If time only has up to seconds
                 #print(artifact_list[index1][index2])
                 artifact_list[index1][index2]['Artifact_Relationships'] = []
                 updated_artifact_list.append(artifact_list[index1][index2])
@@ -67,7 +70,8 @@ class RelationshipExtractor:
     def find_relationships(self, artifact_list, delta_time):
         logging.debug("find_relationships(): Instantiated")
         relationship_tracker = []
-        time_dif = dt.timedelta(seconds=delta_time)
+        time_dif = dt.timedelta(seconds=delta_time[0])
+        time_dif = time_dif + dt.timedelta(milliseconds=delta_time[1])
         index1 = 0
         index2 = 0
         while index1 < (len(artifact_list) - 1):
@@ -93,13 +97,16 @@ class RelationshipExtractor:
         while index < len(artifact_list):
             if artifact_list[index]['Artifact_id'] not in relationship_tracker:
                 del updated_artifact_list[index]
-            updated_artifact_list[index]['start'] = updated_artifact_list[index]['start'].strftime('%Y-%m-%d %H:%M:%S')
+            try:
+                updated_artifact_list[index]['start'] = updated_artifact_list[index]['start'].strftime('%Y-%m-%d %H:%M:%S.%f') # If time contains milliseconds
+            except:
+                updated_artifact_list[index]['start'] = updated_artifact_list[index]['start'].strftime('%Y-%m-%d %H:%M:%S') # If time only has up to seconds
             index += 1
         logging.debug("clean_relationship_list(): Complete")
         return updated_artifact_list
 
     def create_relationship_file(self, relationship_list):
         logging.debug("create_relationship_file(): Instantiated")
-        with open(os.getcwd() + '/GeneratedData/Relationships.JSON', 'w') as outfile:
+        with open(os.getcwd() + '/src/GeneratedData/Relationships.JSON', 'w') as outfile:
             json.dump(relationship_list, outfile, ensure_ascii=False, indent=4)
         logging.debug("create_relationship_file(): Complete")
