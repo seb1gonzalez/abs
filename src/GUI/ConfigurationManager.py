@@ -99,9 +99,9 @@ class ConfMng(QWidget):
 
     def extract_json_data(self):
         logging.debug("extract_json_data(): Instantiated")
-        json_file = open(os.getcwd() + '/src/Config/Config.JSON')
+        json_file = open(os.getcwd() + '/../Config/Config.JSON')
         self.data = json.load(json_file)
-        print(self.data)
+        logging.debug(self.data)
         logging.debug(self.data)
         json_file.close()
         logging.debug("extract_json_data(): Complete")
@@ -161,7 +161,7 @@ class ConfMng(QWidget):
         self.data['Agent Name'] = self.agent_name_le.text()
         self.data['Time Range'] = self.timesp.value()
         self.data['Data Folder'] = self.directory_json_le.text()
-        with open(os.getcwd() + '/src/Config/Config.JSON', 'w') as outfile:
+        with open(os.getcwd() + '/../Config/Config.JSON', 'w') as outfile:
             json.dump(self.data, outfile, ensure_ascii=False, indent=4)
         logging.debug("overwrite_config_file(): Complete")
 

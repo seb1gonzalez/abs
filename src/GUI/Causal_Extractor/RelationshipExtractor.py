@@ -107,6 +107,6 @@ class RelationshipExtractor:
 
     def create_relationship_file(self, relationship_list):
         logging.debug("create_relationship_file(): Instantiated")
-        with open(os.getcwd() + '/src/GeneratedData/Relationships.JSON', 'w') as outfile:
+        with open(os.getcwd() + '/../GeneratedData/Relationships.JSON', 'w') as outfile:
             json.dump(relationship_list, outfile, ensure_ascii=False, indent=4)
         logging.debug("create_relationship_file(): Complete")
