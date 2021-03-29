@@ -62,9 +62,7 @@ class RunnerApp(QWidget):
         self.button1.clicked.connect(self.import_script_button_clicked)
         self.button2.clicked.connect(self.clear_loaded_script)
         self.button3.clicked.connect(self.run_agent_clicked)
-        self.deletebutton.clicked.connect(self.clear_loaded_script)
         #self.show()
-        #self.ECELd_clicked()
 
 
     def ECELd_clicked(self):
