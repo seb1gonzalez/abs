@@ -1,12 +1,29 @@
+<<<<<<< HEAD
 DEBUG:root:main_window(): Project started.
 DEBUG:root:RunnerComponent(): Runner instantiated.
 DEBUG:root:RunnerComponent.py(): Nothing to clear.
 DEBUG:root:RunnerComponent.py(): No script was specified.
 DEBUG:root:RunnerComponent.py(): No script was specified.
+=======
+DEBUG:root:addProjectItem(): retranslateUi(): instantiated
+DEBUG:root:addprojectItem(): retranslateUi(): Completed
+DEBUG:root:addProjectItem(): retranslateUi(): instantiated
+DEBUG:root:addprojectItem(): retranslateUi(): Completed
+DEBUG:root:addProjectItem(): retranslateUi(): instantiated
+DEBUG:root:addprojectItem(): retranslateUi(): Completed
+DEBUG:root:RunnerComponent.py(): Script Added.
+DEBUG:root:RunnerComponent.py(): Script Added.
+DEBUG:root:RunnerComponent.py(): Script Added.
+DEBUG:root:RunnerComponent.py(): Script Added.
+DEBUG:root:RunnerComponent.py(): Script Added.
+DEBUG:root:RunnerComponent.py(): Nothing to clear.
+DEBUG:root:RunnerComponent.py(): Nothing to clear.
+>>>>>>> runner
 DEBUG:root:RunnerComponent.py(): /home/kali/Desktop/abs/src/GUI/Runner/sample.exp has been loaded.
 DEBUG:root:RunnerComponent.py(): Script Added.
 DEBUG:root:RunnerComponent.py(): Script Removed.
 DEBUG:root:RunnerComponent.py(): No script was specified.
+<<<<<<< HEAD
 DEBUG:root:RunnerComponent.py(): Script has already been cleared.
 DEBUG:root:RunnerComponent.py(): /home/kali/Desktop/abs/src/GUI/Runner/sample.exp has been loaded.
 DEBUG:root:RunnerComponent.py(): Script Added.
@@ -14,3 +31,7 @@ DEBUG:root:RunnerComponent.py(): /home/kali/Desktop/abs/src/GUI/Runner/sample.ex
 DEBUG:root:RunnerComponent.py(): Script Added.
 DEBUG:root:RunnerComponent.py(): Script Removed.
 DEBUG:root:RunnerComponent.py(): Script has already been cleared.
+=======
+DEBUG:root:RunnerComponent.py(): /home/kali/Desktop/abs/src/GUI/Runner/sample.exp has been loaded.
+DEBUG:root:RunnerComponent.py(): Script Added.
+>>>>>>> runner
