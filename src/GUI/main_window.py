@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from ConfigurationManager import ConfMng
-from Builder.se import DialogApp
+from Builder.Builder import Builder
 from RunnerComponent import RunnerApp
 
 class tabdemo(QTabWidget):
@@ -32,7 +32,7 @@ class tabdemo(QTabWidget):
 		
    def builder_UI(self):
        tab2_layout = QVBoxLayout()
-       builder = DialogApp(self)
+       builder = Builder(self)
        tab2_layout.addWidget(builder)
        self.tab2.setLayout(tab2_layout)
 
