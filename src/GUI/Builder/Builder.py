@@ -23,33 +23,38 @@ class Builder(QWidget):
         try:
 
             self.button_import = QPushButton("Import")
+            self.button_import.clicked.connect(self.get_text_file)
+
             self.button_save = QPushButton("Save")
             self.button_undo = QPushButton("Undo")
-
-            self.dropdown = QComboBox()
-            self.dropdown.addItems(["Network", "Mouse-Clicks", "Keystrokes"])
-            # self.dropdown.addItem("Network")
-            # self.dropdown.addItem("Mouse-Clicks")
-            # self.dropdown.addItem("Keystrokes")
 
             self.hbox = QHBoxLayout()
             self.vbox = QVBoxLayout()
 
+
             self.hbox.addWidget(self.button_import)
             self.hbox.addWidget(self.button_save)
             self.hbox.addWidget(self.button_undo)
-            self.hbox.addWidget(self.dropdown)
             self.hbox.setAlignment(Qt.AlignTop)
 
             self.vbox.addLayout(self.hbox)
+            self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
+            self.widget = QWidget()# Widget that contains the collection of Vertical Box
+            self.vbox_scroll = QVBoxLayout()  # The Vertical Box that contains the Horizontal Boxes of  labels and buttons
+            self.vbox_scroll.setAlignment(Qt.AlignTop)
+            size = QRect()
+            size.setWidth(300)
+            size.setHeight(800)
+            self.vbox_scroll.setGeometry(size)
+            self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+            self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+            self.scroll.setWidgetResizable(True)
+
+
+
             self.setLayout(self.vbox)
 
-            # self.button1 = QPushButton('Import script')
-            # self.button1.setMaximumWidth(80)
-            # self.button1.setGeometry(0,0,80,20)
-            self.button_import.clicked.connect(self.get_text_file)
-            # self.layout.addWidget(self.button1)
-            # self.setLayout(self.layout)
+
         except Exception:
             traceback.print_exc()
 
@@ -64,14 +69,7 @@ class Builder(QWidget):
                 # Opens any file in the JSON format / Abre el JSON file y lo guarda como 'json_file'
                 with open(file_name[0]) as json_file:
                     document: dict = json.load(json_file)
-                    try:  
-                        index = 1
-                          
-                        scrollWidget = QScrollBar()
-                        scrollWidget.setMinimumHeight(500)
-                        self.vbox.addWidget(scrollWidget)
-                 
-                        
+                    try:
                         for i in range(len(document)):
                             data = document[i]
                             json_model = QJsonModel()
@@ -79,15 +77,14 @@ class Builder(QWidget):
                             json_tree_view.setModel(json_model)
                             json_model.load(data)
                             casual_relationship = CasualRelationship(json_tree_view)
-                            self.vbox.addWidget(casual_relationship)
-                       
-                            
-                            # if index == 3:
-                            #     break
+                            self.vbox_scroll.addWidget(casual_relationship)
+                        self.widget.setLayout(self.vbox_scroll)
+                        self.scroll.setWidget(self.widget)
+                        self.vbox.addWidget(self.scroll)
+
                     except Exception:
                         traceback.print_exc()
                     json_file.close()
-
             else:
                 pass
 

@@ -37,7 +37,7 @@ class CasualRelationship(QWidget):
         self.hide_button.clicked.connect(self.clicked_hidden)
         self.hide_button_check = 0
 
-        self.layout.setColumnMinimumWidth(0,500)
+        # self.layout.setColumnMinimumWidth(0,500)
         # self.layout.setColumnStretch(0,3)
         # self.layout.setColumnStretch(3,2)
 

@@ -33,8 +33,6 @@ class tabdemo(QTabWidget):
    def builder_UI(self):
        tab2_layout = QVBoxLayout()
        builder = Builder(self)
-       scroll = QScrollBar()
-       tab2_layout.addWidget(builder)
        tab2_layout.addWidget(builder)
        self.tab2.setLayout(tab2_layout)
 
