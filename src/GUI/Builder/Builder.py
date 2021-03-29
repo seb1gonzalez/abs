@@ -23,40 +23,72 @@ class Builder(QWidget):
         try:
 
             self.button_import = QPushButton("Import")
-            self.button_import.clicked.connect(self.get_text_file)
-
             self.button_save = QPushButton("Save")
             self.button_undo = QPushButton("Undo")
+            self.button_import.clicked.connect(self.get_text_file)
+            self.button_save.clicked.connect(self.save_changes)
+
+            self.document = None
+            self.casual_relationship = None
+            self.casual_dependency = None
+            self.json_model = None
+            self.json_tree_view = None
+            self.data = None
 
             self.hbox = QHBoxLayout()
             self.vbox = QVBoxLayout()
-
 
             self.hbox.addWidget(self.button_import)
             self.hbox.addWidget(self.button_save)
             self.hbox.addWidget(self.button_undo)
             self.hbox.setAlignment(Qt.AlignTop)
+            self.hbox_rel_dep = QHBoxLayout()
+
+            self.vbox_relationship = QVBoxLayout()
+            self.vbox_dependencies = QVBoxLayout()
+
+            self.hbox_rel_dep.addLayout(self.vbox_relationship)
+            self.hbox_rel_dep.addLayout(self.vbox_dependencies)
+            self.hbox_rel_dep.setAlignment(Qt.AlignTop)
+
+            self.scroll_left = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
+            self.scroll_wid_left = QWidget()  # Widget that contains the collection of Vertical Box
+            self.vbox_scroll_left = QVBoxLayout()
+
+            self.scroll_wid_left.setMinimumSize(300,700)
+
+            self.scroll_right = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
+            self.scroll_wid_right = QWidget()  # Widget that contains the collection of Vertical Box
+
+            # Scroll Area Properties
+            self.scroll_left.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+            self.scroll_left.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+            self.scroll_left.setWidgetResizable(True)
 
             self.vbox.addLayout(self.hbox)
-            self.scroll = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-            self.widget = QWidget()# Widget that contains the collection of Vertical Box
-            self.vbox_scroll = QVBoxLayout()  # The Vertical Box that contains the Horizontal Boxes of  labels and buttons
-            self.vbox_scroll.setAlignment(Qt.AlignTop)
-            size = QRect()
-            size.setWidth(300)
-            size.setHeight(800)
-            self.vbox_scroll.setGeometry(size)
-            self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-            self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-            self.scroll.setWidgetResizable(True)
-
-
+            self.vbox.addLayout(self.hbox_rel_dep)
 
             self.setLayout(self.vbox)
-
-
         except Exception:
             traceback.print_exc()
+    
+    def save_changes(self):
+        if len(CasualRelationship.deleted) == 0 and len(CasualRelationship.hidden) == 0:
+            return
+        try:
+            for i in range(len(self.document)):
+                data = self.document[i]
+                json_model = QJsonModel()
+                json_tree_view = QTreeView()
+                json_tree_view.setModel(json_model)
+                json_model.load(data)
+                self.casual_dependency = CasualRelationship(json_tree_view, data['Artifact_id'])
+                self.vbox_dependencies.addWidget(self.casual_dependency)
+        except Exception:
+            traceback.print_exc()
+
+        
+        
 
     def get_text_file(self):
         dialog = QFileDialog()
@@ -68,23 +100,24 @@ class Builder(QWidget):
             if file_name[0].endswith(('.json', '.JSON')):
                 # Opens any file in the JSON format / Abre el JSON file y lo guarda como 'json_file'
                 with open(file_name[0]) as json_file:
-                    document: dict = json.load(json_file)
+                    self.document: dict = json.load(json_file)
+                    print(self.document)
                     try:
-                        for i in range(len(document)):
-                            data = document[i]
-                            json_model = QJsonModel()
-                            json_tree_view = QTreeView()
-                            json_tree_view.setModel(json_model)
-                            json_model.load(data)
-                            casual_relationship = CasualRelationship(json_tree_view)
-                            self.vbox_scroll.addWidget(casual_relationship)
-                        self.widget.setLayout(self.vbox_scroll)
-                        self.scroll.setWidget(self.widget)
-                        self.vbox.addWidget(self.scroll)
+                        for i in range(len(self.document)):
+                            self.data = self.document[i]
+                            self.json_model = QJsonModel()
+                            self.json_tree_view = QTreeView()
+                            self.json_tree_view.setModel(self.json_model)
+                            self.json_model.load(self.data)
+                            self.casual_relationship = CasualRelationship(self.json_tree_view, self.data['Artifact_id'])
+                            self.vbox_scroll_left.addWidget(self.casual_relationship)
+                        self.scroll_wid_left.setLayout(self.vbox_scroll_left)
+                        self.vbox_relationship.addWidget(self.scroll_wid_left)
 
                     except Exception:
                         traceback.print_exc()
                     json_file.close()
+
             else:
                 pass
 
