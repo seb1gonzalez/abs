@@ -1,0 +1,23 @@
+{
+    "events": [
+    {
+        "content": "whoami[Return]",
+        "className": "Keypresses",
+        "start": "2021-02-26T02:28:57"
+    },
+    {
+        "content" : "ping 8.8.8.8[Return]",
+        "className" : "Keypresses",
+        "start" : "2021-02-26T02:29:01"
+    },
+    {
+        "content" : "[Control_L]z",
+        "className" : "Keypresses",
+        "start" : "2021-02-26T02:29:05"
+    },
+
+    {   "content" : "ifcofnig[BackSpace][BackSpace][BackSpace][BackSpace]nfig",
+        "className" : "Keypresses",
+        "start" : "2021-02-26T02:29:13"}
+    ]
+}
