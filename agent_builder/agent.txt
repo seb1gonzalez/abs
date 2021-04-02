@@ -1,1 +1,20 @@
-
+import pyautogui
+import time
+time.sleep(2)
+pyautogui.hotkey('ctrl', 'alt', 't')
+pyautogui.typewrite('whoami')
+time.sleep(1)
+pyautogui.typewrite(['Enter'])
+time.sleep(1)
+pyautogui.typewrite('ping 8.8.8.8')
+time.sleep(1)
+pyautogui.typewrite(['Enter'])
+time.sleep(1)
+pyautogui.typewrite('z')
+time.sleep(1)
+pyautogui.typewrite(['Enter'])
+time.sleep(1)
+pyautogui.typewrite('ifcofnignfig')
+time.sleep(1)
+pyautogui.typewrite(['Enter'])
+time.sleep(1)
