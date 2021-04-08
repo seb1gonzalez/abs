@@ -7,9 +7,11 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QDoubleSpinBox, QListWidget, QPushButton, QStyle
 
-from Causal_Extractor.RelationshipExtractor import RelationshipExtractor
+#from Causal_Extractor.RelationshipExtractor import RelationshipExtractor
 from Dialogs.DirectoryDialog import DirectoryDialog
+from Dialogs.ResultsDialog import ResultsDlg
 from MessageBoxs.FileListMsgBox import FileListMsgBox
+from MessageBoxs.OverwriteMsgBox import OverwriteMsgBox
 
 class ConfMng(QWidget):
     def __init__(self,parent):
@@ -161,13 +163,19 @@ class ConfMng(QWidget):
         self.data['Agent Name'] = self.agent_name_le.text()
         self.data['Time Range'] = self.timesp.value()
         self.data['Data Folder'] = self.directory_json_le.text()
-        with open(os.getcwd() + '/../Config/Config.JSON', 'w') as outfile:
-            json.dump(self.data, outfile, ensure_ascii=False, indent=4)
+        try:
+            with open(os.getcwd() + '/../Config/Config.JSON', 'w') as outfile:
+                json.dump(self.data, outfile, ensure_ascii=False, indent=4)
+            OverwriteMsgBox().create_msg_box(self.data, 1)
+        except:
+            OverwriteMsgBox().create_msg_box(self.data, 0)
         logging.debug("overwrite_config_file(): Complete")
 
     def relationship_extraction(self):
         logging.debug("relationship_extraction(): Instantiated")
-        RelationshipExtractor().extract_relationships(self.files, (str(self.timesp.value())).split('.'))
+        self.results_w = ResultsDlg()
+        self.results_w.start_extraction(self.files, (str(self.timesp.value())).split('.'))
+        self.results_w.show()
         logging.debug("relationship_extraction(): Complete")
 
 """ if __name__ == '__main__':

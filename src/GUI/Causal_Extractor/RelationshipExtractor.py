@@ -3,11 +3,22 @@ import logging
 import json
 import os
 
-class RelationshipExtractor:
-    def extract_relationships(self, files, delta_time):
+from PyQt5.QtCore import QThread, pyqtSignal
+
+class RelationshipExtractor(QThread):
+    signal1 = pyqtSignal()
+    signal2 = pyqtSignal()
+    signal3 = pyqtSignal()
+
+    def __init__(self, files, delta_time):
+        QThread.__init__(self)
+        self.files = files
+        self.delta_time = delta_time
+
+    def run(self):
         logging.debug("extract_relationships(): Instantiated")
-        delta_time = [int(value) for value in delta_time]
-        artifact_list = self.retrieve_json_data(files)
+        delta_time = [int(value) for value in self.delta_time]
+        artifact_list = self.retrieve_json_data(self.files)
         artifact_list = self.restructure_artifacts(artifact_list)
         relationship_list, relationship_tracker = self.find_relationships(artifact_list, delta_time)
         relationship_list = self.clean_relationship_list(artifact_list, relationship_tracker)
@@ -22,6 +33,7 @@ class RelationshipExtractor:
             temp_list.append(json.load(json_file))
             json_file.close()
         logging.debug("retrieve_json_data(): Complete")
+        self.signal3.emit()
         return temp_list
 
     def restructure_artifacts(self, artifact_list):
@@ -56,17 +68,17 @@ class RelationshipExtractor:
                     artifact_list[index1][index2]['start'] = dt.datetime.strptime(artifact_list[index1][index2]['start'], '%Y-%m-%d %H:%M:%S.%f') # If time contains milliseconds
                 except:
                     artifact_list[index1][index2]['start'] = dt.datetime.strptime(artifact_list[index1][index2]['start'], '%Y-%m-%d %H:%M:%S')  # If time only has up to seconds
-                #print(artifact_list[index1][index2])
                 artifact_list[index1][index2]['Artifact_Relationships'] = []
                 updated_artifact_list.append(artifact_list[index1][index2])
+                self.signal1.emit()
                 artifact_counter += 1
                 index2 += 1
             index2 = 0
             index1 += 1
         logging.debug("restructure_artifacts(): Complete")
+        self.signal3.emit()
         return updated_artifact_list
 
-    # Currently only works with seconds, need to do milliseconds
     def find_relationships(self, artifact_list, delta_time):
         logging.debug("find_relationships(): Instantiated")
         relationship_tracker = []
@@ -84,12 +96,13 @@ class RelationshipExtractor:
                     if artifact_list[index2]['Artifact_id'] not in relationship_tracker:
                         relationship_tracker.append(artifact_list[index2]['Artifact_id'])
                     artifact_list[index1]['Artifact_Relationships'].append(artifact_list[index2]['Artifact_id'])
+                    self.signal2.emit()
                 index2 += 1
             index1 += 1
         logging.debug("find_relationships(): Complete")
+        self.signal3.emit()
         return artifact_list, relationship_tracker
 
-    # Currently only works with seconds, need to do milliseconds
     def clean_relationship_list(self, artifact_list, relationship_tracker):
         logging.debug("clean_relationship_list(): Instantiated")
         index = 0
@@ -103,10 +116,12 @@ class RelationshipExtractor:
                 updated_artifact_list[index]['start'] = updated_artifact_list[index]['start'].strftime('%Y-%m-%d %H:%M:%S') # If time only has up to seconds
             index += 1
         logging.debug("clean_relationship_list(): Complete")
+        self.signal3.emit()
         return updated_artifact_list
 
     def create_relationship_file(self, relationship_list):
         logging.debug("create_relationship_file(): Instantiated")
         with open(os.getcwd() + '/../GeneratedData/Relationships.JSON', 'w') as outfile:
             json.dump(relationship_list, outfile, ensure_ascii=False, indent=4)
+        self.signal3.emit()
         logging.debug("create_relationship_file(): Complete")

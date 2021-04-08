@@ -1,6 +1,6 @@
 import logging
 
-from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QMessageBox, QTextEdit
 
 class FileListMsgBox:
     def create_msg_box(self, item_name):
@@ -9,15 +9,17 @@ class FileListMsgBox:
         msg.setWindowTitle("List File Information")
         msg.setMaximumHeight(500)
         msg.setIcon(QMessageBox.Information)
-        msg.setText("The file you have selected is: " + item_name)
-        msg.setInformativeText("Here you can see more details about the file you selected.")
-        msg.setStandardButtons(QMessageBox.Ok)
-        msg.buttonClicked.connect(self.msgbtn)
+        msg.setText("The file to be imported: \n" + item_name)
+        msg.setInformativeText("Click on Show Details to see what is contained inside the file.")
+
+        self.get_file_info(msg, item_name)
+
         retval = msg.exec_()
-        logging.debug("value of pressed message box button: " + str(retval))
         logging.debug("create_msg_box(): Complete")
 
-    def msgbtn(self, i):
-        logging.debug("msgbtn(): Instantiated")
-        logging.debug("Button pressed is: " + i.text())
-        logging.debug("msgbtn(): Complete")
+    def get_file_info(self, msg, file):
+        logging.debug("get_file_info(): Instantiated")
+        f_buff = open(file, "r")
+        msg.setDetailedText(f_buff.read())
+        f_buff.close()
+        logging.debug("get_file_info(): Complete")
