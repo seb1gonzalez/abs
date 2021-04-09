@@ -1,3 +1,5 @@
 __pycache__/
 .vscode/
 *.pyc
+Runner/__pycache__/Runner.cpython-38.pyc
+

@@ -3,13 +3,13 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from ConfigurationManager import ConfMng
-from se import DialogApp
+from Builder.Builder import Builder
 from RunnerComponent import RunnerApp
 
 class tabdemo(QTabWidget):
    def __init__(self, parent = None):
       super(tabdemo, self).__init__(parent)
-      self.setGeometry(100, 100, 600,400)
+      self.setGeometry(100, 100, 1200,800)
       self.tab1 = QWidget()
       self.tab2 = QWidget()
       self.tab3 = QWidget()
@@ -32,7 +32,7 @@ class tabdemo(QTabWidget):
 		
    def builder_UI(self):
        tab2_layout = QVBoxLayout()
-       builder = DialogApp(self)
+       builder = Builder(self)
        tab2_layout.addWidget(builder)
        self.tab2.setLayout(tab2_layout)
 

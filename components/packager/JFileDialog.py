@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QFileDialog, QWidget
 import logging
 
-class JSONFileDialog:
+class JFileDialog:
     def json_dialog(self):
         logging.info('json_dialog(): Instantiated')
         widget = QFileDialog()
