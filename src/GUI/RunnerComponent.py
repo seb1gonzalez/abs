@@ -98,14 +98,14 @@ class RunnerApp(QWidget):
     #initialize or grab preexisting log history
     def open_log_file(self):
         global content
-        f = open('/home/kali/Desktop/abs/src/GUI/Runner/logs.txt', 'r')
+        f = open('Runner/logs.txt', 'r')
         content = f.read()
         f.close()
         return content
 
     #appends each log to log history
     def update_log_window(self, msg):
-        f = open('/home/kali/Desktop/abs/src/GUI/Runner/logs.txt', 'a')
+        f = open('Runner/logs.txt', 'a')
         f.write(msg)
         f.close()
         self.open_log_file()
