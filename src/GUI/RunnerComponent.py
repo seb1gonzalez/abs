@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import (QApplication, QWidget, QInputDialog, QLineEdit, QLabel, QMessageBox, QFileDialog, QVBoxLayout, QGridLayout, QHBoxLayout, QPushButton, QPlainTextEdit)
 from PyQt5.QtGui import QTextCursor
 from Runner.Runner import Runner
+#from ..agent_builder.agent_builder import build_agent
 import sys
 import subprocess
 import logging
@@ -53,9 +54,16 @@ class RunnerApp(QWidget):
         self.logwindow.addWidget(self.log)
         self.logwindow.addLayout(self.run)
         
+        self.scriptwindow = QHBoxLayout()
+        self.script = QPlainTextEdit()
+        #script_content = self.open_script_file()
+        #self.script.setPlainText(script_content)
+        self.scriptwindow.addWidget(self.script)
+        self.scriptwindow.addLayout(self.logwindow)
+
         self.mainlayout = QVBoxLayout()
         self.mainlayout.addLayout(self.layout)
-        self.mainlayout.addLayout(self.logwindow)
+        self.mainlayout.addLayout(self.scriptwindow)
         
         self.setLayout(self.mainlayout)
 
@@ -76,19 +84,24 @@ class RunnerApp(QWidget):
     #import script
     def import_script_button_clicked(self):
         global cmd
+        global fileName
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
         fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
         if fileName:
             print(fileName)
         self.display_alert(fileName + " has been loaded.")
-        cmd = str(fileName)
+        cmd = "python3 " + str(fileName)
         print(cmd)
-        self.set_script_name(cmd)
+        self.set_script_name(str(fileName))
         self.update_log_window("\nDEBUG:root:RunnerComponent.py(): Script Added.")
+        script_content = self.open_script_file(fileName)
+        self.script.setPlainText(script_content)
+        #print(self.script.toPlainText())
 
     #run agent
     def run_agent_clicked(self):
+        self.update_script(fileName)
         try:
             subprocess.run(cmd, shell=True)
         except (NameError , TypeError):
@@ -98,19 +111,34 @@ class RunnerApp(QWidget):
     #initialize or grab preexisting log history
     def open_log_file(self):
         global content
-        f = open('/home/kali/Desktop/abs/src/GUI/Runner/logs.txt', 'r')
+        f = open('Runner/logs.txt', 'r')
         content = f.read()
         f.close()
         return content
 
+    def open_script_file(self, file):
+        global script_content
+        f = open(file, 'r')
+        script_content = f.read()
+        f.close()
+        return script_content
+
     #appends each log to log history
     def update_log_window(self, msg):
-        f = open('/home/kali/Desktop/abs/src/GUI/Runner/logs.txt', 'a')
+        f = open('Runner/logs.txt', 'a')
         f.write(msg)
         f.close()
         self.open_log_file()
         self.log.setPlainText(content)
         self.log.moveCursor(QTextCursor.End)
+
+
+    def update_script(self, file):
+        f = open(file, 'w')
+        new_content = self.script.toPlainText()
+        f.write(new_content)
+        f.close()
+    
 
     #clears loaded script
     def clear_loaded_script(self):
@@ -143,6 +171,7 @@ class RunnerApp(QWidget):
             else:
                 cmd = None
                 self.set_script_name('')
+                self.script.setPlainText('')
                 self.update_log_window("\nDEBUG:root:RunnerComponent.py(): Script Removed.")
         except (NameError, TypeError):
             self.display_alert('Nothing to clear.')
