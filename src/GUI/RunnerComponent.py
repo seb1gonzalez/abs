@@ -90,19 +90,19 @@ class RunnerApp(QWidget):
         fileName, _ = QFileDialog.getOpenFileName(self, "QFileDialog.getOpenFileName()", "","All Files (*);;Python Files (*.py)", options=options)
         if fileName:
             print(fileName)
-        self.display_alert(fileName + " has been loaded.")
-        cmd = "python3 " + str(fileName)
-        print(cmd)
-        self.set_script_name(str(fileName))
-        self.update_log_window("\nDEBUG:root:RunnerComponent.py(): Script Added.")
-        script_content = self.open_script_file(fileName)
-        self.script.setPlainText(script_content)
-        #print(self.script.toPlainText())
+            self.display_alert(fileName + " has been loaded.")
+            cmd = "python3 " + str(fileName)
+            print(cmd)
+            self.set_script_name(str(fileName))
+            self.update_log_window("\nDEBUG:root:RunnerComponent.py(): Script Added.")
+            script_content = self.open_script_file(fileName)
+            self.script.setPlainText(script_content)
+            #print(self.script.toPlainText())
 
     #run agent
     def run_agent_clicked(self):
-        self.update_script(fileName)
         try:
+            self.update_script(fileName)
             subprocess.run(cmd, shell=True)
         except (NameError , TypeError):
             self.display_alert('No script was specified.')
@@ -118,10 +118,14 @@ class RunnerApp(QWidget):
 
     def open_script_file(self, file):
         global script_content
-        f = open(file, 'r')
-        script_content = f.read()
-        f.close()
-        return script_content
+        try:
+            f = open(file, 'r')
+            script_content = f.read()
+            f.close()
+            return script_content
+        except (FileNotFoundError):
+            return
+        
 
     #appends each log to log history
     def update_log_window(self, msg):
@@ -134,10 +138,13 @@ class RunnerApp(QWidget):
 
 
     def update_script(self, file):
-        f = open(file, 'w')
-        new_content = self.script.toPlainText()
-        f.write(new_content)
-        f.close()
+        try:
+            f = open(file, 'w')
+            new_content = self.script.toPlainText()
+            f.write(new_content)
+            f.close()
+        except (NameError, FileNotFoundError):
+            self.display_alert('Nothing to run.')
     
 
     #clears loaded script
