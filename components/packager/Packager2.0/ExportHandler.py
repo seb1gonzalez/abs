@@ -83,7 +83,7 @@ class ExportThread(QThread):
         if self.bool_file_list[3]:
             self.signal9.emit()
             try:
-                tempstr = "C:\\Users\\peter\\Desktop\\abs\\components\\Packager2.0\\GeneratedData"
+                tempstr = "C:\\Users\\peter\\Desktop\\abs\\components\\packager\\Packager2.0\\GeneratedData"
                 newstr = '\\'.join(self.vm_file.split('/'))
                 os.system("copy " + f'"{newstr}"' + " " + f'"{tempstr}"')
                 self.signal7.emit()

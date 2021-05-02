@@ -34,7 +34,7 @@ class ImportThread(QThread):
                 json_file = open(self.config_file)
                 temp_data = json.load(json_file)
                 json_file.close()
-                with open(os.getcwd() + '\\..\\..\\src\\Config\\Config.JSON', 'w') as outfile:
+                with open(os.getcwd() + '\\..\\..\\..\\src\\Config\\Config.JSON', 'w') as outfile:
                     json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
                 self.signal1.emit()
                 self.signal9.emit()
@@ -50,7 +50,7 @@ class ImportThread(QThread):
                 json_file = open(self.relationship_file)
                 temp_data = json.load(json_file)
                 json_file.close()
-                with open(os.getcwd() + '\\..\\..\\src\\Relations\\Relationships.JSON', 'w') as outfile:
+                with open(os.getcwd() + '\\..\\..\\..\\src\\Relations\\Relationships.JSON', 'w') as outfile:
                     json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
                 self.signal3.emit()
                 self.signal9.emit()
@@ -67,7 +67,7 @@ class ImportThread(QThread):
                 temp_data = json.load(json_file)
                 json_file.close()
                 print('hi')
-                with open(os.getcwd() + '\\..\\..\\src\\dependency\\Dependency.JSON', 'w') as outfile:
+                with open(os.getcwd() + '\\..\\..\\..\\src\\dependency\\Dependency.JSON', 'w') as outfile:
                     json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
                 self.signal5.emit()
                 self.signal9.emit()
@@ -82,10 +82,10 @@ class ImportThread(QThread):
             try:
                 head, tail = os.path.split(self.vm_file)
                 tail = os.path.splitext(tail)[0]
-                os.chdir("/../../../../../Program Files/Oracle/VirtualBox/")
+                os.chdir("/../../../../../../Program Files/Oracle/VirtualBox/")
                 os.system("vboxmanage export " + str(tail) + " -o " + str(tail) + ".ova")
-                os.chdir("/../../../Users/peter/Desktop/abs/components/Packager2.0")
-                tempstr = os.getcwd() + '\\..\\..\\src\\OVAFile'
+                os.chdir("/../../../Users/peter/Desktop/abs/components/packager/Packager2.0")
+                tempstr = os.getcwd() + '\\..\\..\\..\\src\\OVAFile'
                 newstr = "C:\\Program Files\\Oracle\\VirtualBox\\" + str(tail) + ".ova"
                 os.system("copy " + f'"{newstr}"' + " " + f'"{tempstr}"')
                 self.signal7.emit()
