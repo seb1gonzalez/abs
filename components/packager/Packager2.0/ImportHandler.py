@@ -97,7 +97,7 @@ class ImportThread(QThread):
                 json_file = open(self.config_file)
                 temp_data = json.load(json_file)
                 json_file.close()
-                with open(os.getcwd() + os.path.normpath('/../../../src/Config/Config.JSON'), 'w') as outfile:
+                with open(os.path.dirname(os.path.dirname(os.path.dirname(os.getcwd()))) + os.path.normpath('\\src\\Config\\Config.JSON'), 'w') as outfile:
                     json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
                 self.signal1.emit()
                 self.signal9.emit()
@@ -113,7 +113,7 @@ class ImportThread(QThread):
                 json_file = open(self.relationship_file)
                 temp_data = json.load(json_file)
                 json_file.close()
-                with open(os.getcwd() + os.path.normpath('/../../../src/Relations/Relationships.JSON'), 'w') as outfile:
+                with open(os.path.dirname(os.path.dirname(os.path.dirname(os.getcwd()))) + '\\src\\Relations\\Relationships.JSON', 'w') as outfile:
                     json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
                 self.signal3.emit()
                 self.signal9.emit()
@@ -129,7 +129,7 @@ class ImportThread(QThread):
                 json_file = open(self.dependency_file)
                 temp_data = json.load(json_file)
                 json_file.close()
-                with open(os.getcwd() + os.path.normpath('/../../../src/dependency/Dependency.JSON'), 'w') as outfile:
+                with open(os.path.dirname(os.path.dirname(os.path.dirname(os.getcwd()))) + os.path.normpath('\\src\\dependency\\Dependency.JSON'), 'w') as outfile:
                     json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
                 self.signal5.emit()
                 self.signal9.emit()
