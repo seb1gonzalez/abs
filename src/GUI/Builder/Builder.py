@@ -25,7 +25,7 @@ class Builder(QWidget):
             self.button_generate.setMaximumWidth(80)
             self.button_delete = QPushButton("Delete Selected")
             self.button_delete.setStyleSheet("background-color:#ff1744;")
-            self.button_delete.setMaximumWidth(100)
+            self.button_delete.setMaximumWidth(120)
 
             self.button_delta_time.setEnabled(False)
             self.button_save.setEnabled(False)
