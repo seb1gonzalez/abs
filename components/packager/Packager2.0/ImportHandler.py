@@ -15,10 +15,6 @@ class ImportThread(QThread):
     signal8 = pyqtSignal()
     signal9 = pyqtSignal()
     signal10 = pyqtSignal()
-    #flag1 = 0
-    #flag2 = 0
-    #flag3 = 0
-    #flag4 = 0
 
     def __init__(self, config_file, relationship_file, dependency_file, vm_file, bool_file_list):
         logging.debug("ImportThread(): Instantiated")
@@ -38,27 +34,13 @@ class ImportThread(QThread):
                 json_file = open(self.config_file)
                 temp_data = json.load(json_file)
                 json_file.close()
-                with open(os.getcwd() + '\\..\\..\\..\\src\\Config\\Config.JSON', 'w') as outfile:
+                with open(os.getcwd() + os.path.normpath('/../../../src/Config/Config.JSON'), 'w') as outfile:
                     json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
                 self.signal1.emit()
                 self.signal9.emit()
             except:
-                #flag1 = 1
                 self.signal2.emit()
                 self.signal9.emit()
-            #if flag1 = 1:
-            #    flag1 = 0
-            #    try:
-            #        json_file = open(self.config_file)
-            #        temp_data = json.load(json_file)
-            #        json_file.close()
-            #        with open(os.getcwd() + '/../../../src/Config/Config.JSON', 'w') as outfile:
-            #            json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
-            #        self.signal1.emit()
-            #        self.signal9.emit()
-            #    except:
-            #        self.signal2.emit()
-            #        self.signal9.emit()
         else:
             self.signal9.emit()
             self.signal9.emit()
@@ -68,27 +50,13 @@ class ImportThread(QThread):
                 json_file = open(self.relationship_file)
                 temp_data = json.load(json_file)
                 json_file.close()
-                with open(os.getcwd() + '\\..\\..\\..\\src\\Relations\\Relationships.JSON', 'w') as outfile:
+                with open(os.getcwd() + os.path.normpath('/../../../src/Relations/Relationships.JSON'), 'w') as outfile:
                     json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
                 self.signal3.emit()
                 self.signal9.emit()
             except:
-                #flag2 = 1
                 self.signal4.emit()
                 self.signal9.emit()
-            #if flag2 = 1:
-            #    flag2 = 0
-            #    try:
-            #        json_file = open(self.config_file)
-            #        temp_data = json.load(json_file)
-            #        json_file.close()
-            #        with open(os.getcwd() + '/../../../src/Config/Relationships.JSON', 'w') as outfile:
-            #            json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
-            #        self.signal3.emit()
-            #        self.signal9.emit()
-            #    except:
-            #        self.signal4.emit()
-            #        self.signal9.emit()
         else:
             self.signal9.emit()
             self.signal9.emit()
@@ -98,27 +66,13 @@ class ImportThread(QThread):
                 json_file = open(self.dependency_file)
                 temp_data = json.load(json_file)
                 json_file.close()
-                with open(os.getcwd() + '\\..\\..\\..\\src\\dependency\\Dependency.JSON', 'w') as outfile:
+                with open(os.getcwd() + os.path.normpath('/../../../src/dependency/Dependency.JSON'), 'w') as outfile:
                     json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
                 self.signal5.emit()
                 self.signal9.emit()
             except:
-                #flag3 = 1
                 self.signal6.emit()
                 self.signal9.emit()
-            #*if flag3 = 1:
-            #    flag3 = 0
-            #    try:
-            #        json_file = open(self.config_file)
-            #        temp_data = json.load(json_file)
-            #        json_file.close()
-            #        with open(os.getcwd() + '/../../../src/Config/Dependency.JSON', 'w') as outfile:
-            #            json.dump(temp_data, outfile, ensure_ascii=False, indent=4)
-            #        self.signal5.emit()
-            #        self.signal9.emit()
-            #    except:
-            #        self.signal6.emit()
-            #        self.signal9.emit()
         else:
             self.signal9.emit()
             self.signal9.emit()
@@ -130,30 +84,13 @@ class ImportThread(QThread):
                 os.chdir("/../../../../../../Program Files/Oracle/VirtualBox/") #change path for windows directory of vboxmanage executable
                 os.system("vboxmanage export " + str(tail) + " -o " + str(tail) + ".ova")
                 os.chdir("/../../../Users/peter/Desktop/abs/components/packager/Packager2.0") #change path for windows
-                tempstr = os.getcwd() + '\\..\\..\\..\\src\\OVAFile'
-                newstr = "C:\\Program Files\\Oracle\\VirtualBox\\" + str(tail) + ".ova"
+                tempstr = os.getcwd() + os.path.normpath('/../../../src/OVAFile')
+                newstr = os.path.normpath("C:/Program Files/Oracle/VirtualBox/") + str(tail) + ".ova"
                 os.system("copy " + f'"{newstr}"' + " " + f'"{tempstr}"')
                 self.signal7.emit()
                 self.signal9.emit()
             except:
-                #flag4 = 1
                 self.signal8.emit()
                 self.signal9.emit()
-            #if flag4 = 1:
-            #    flag4 = 0
-            #    try:
-            #        head, tail = os.path.split(self.vm_file)
-            #        tail = os.path.splitext(tail)[0]
-            #        os.chdir("/../../../../../../Program Files/Oracle/VirtualBox/") #change path for linux directory of vboxmanage executable location
-            #        os.system("vboxmanage export " + str(tail) + " -o " + str(tail) + ".ova")
-            #        os.chdir("/../../../Users/peter/Desktop/abs/components/packager/Packager2.0") #change path for linux
-            #        tempstr = os.getcwd() + '/../../../src/OVAFile'
-            #        newstr = "C:\\Program Files\\Oracle\\VirtualBox\\" + str(tail) + ".ova" #change path to point to directory of vboxmanage executable location
-            #        os.system("cp " + f'"{newstr}"' + " " + f'"{tempstr}"')
-            #        self.signal7.emit()
-            #        self.signal9.emit()
-            #    except:
-            #        self.signal8.emit()
-            #        self.signal9.emit()
         self.signal10.emit()
         logging.debug("run(): Complete")
