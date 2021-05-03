@@ -1,0 +1,176 @@
+[
+    {
+        "content": "bash",
+        "className": "auditd",
+        "start": "20:00:51.000000",
+        "Artifact_id": "0"
+    },
+    {
+        "content": "tput setaf 1",
+        "className": "auditd",
+        "start": "20:00:51.000000",
+        "Artifact_id": "1"
+    },
+    {
+        "content": "dircolors -b",
+        "className": "auditd",
+        "start": "20:00:51.000000",
+        "Artifact_id": "2"
+    },
+    {
+        "content": "wget google.com",
+        "className": "auditd",
+        "start": "20:00:53.000000",
+        "Artifact_id": "3"
+    },
+    {
+        "content": "wget amazon.com",
+        "className": "auditd",
+        "start": "20:00:56.000000",
+        "Artifact_id": "4"
+    },
+    {
+        "content": "whoami",
+        "className": "auditd",
+        "start": "20:00:58.000000",
+        "Artifact_id": "5"
+    },
+    {
+        "content": "service /usr/sbin/service auditd stop",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "6"
+    },
+    {
+        "content": "basename /usr/sbin/service",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "7"
+    },
+    {
+        "content": "basename /usr/sbin/service",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "8"
+    },
+    {
+        "content": "systemctl --quiet is-active multi-user.target",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "9"
+    },
+    {
+        "content": "systemctl list-unit-files --full multi-user.target",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "10"
+    },
+    {
+        "content": "sed -ne s/\\.socket\\s*[a-z]*\\s*$/.socket/p",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "11"
+    },
+    {
+        "content": "xhost -SI:localuser:root",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "12"
+    },
+    {
+        "content": "auditd_parser.s bash /home/kali/eceld-netsys/eceld/plugins/parsers/auditd/auditd_parser.sh /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/raw /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/parsed",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "13"
+    },
+    {
+        "content": "bash /home/kali/eceld-netsys/eceld/plugins/parsers/auditd/auditd_parser.sh /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/raw /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/parsed",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "14"
+    },
+    {
+        "content": "cat /home/kali/eceld-netsys/eceld/plugins/collectors/auditd/raw/1604606450_auditd.txt",
+        "className": "auditd",
+        "start": "20:01:06.000000",
+        "Artifact_id": "15"
+    },
+    {
+        "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606465.0820143_main.py_root.png",
+        "className": "",
+        "start": "20:01:05.000000",
+        "Artifact_id": "16"
+    },
+    {
+        "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606465.7517178_main.py_root.png",
+        "className": "",
+        "start": "20:01:05.000000",
+        "Artifact_id": "17"
+    },
+    {
+        "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606466.7502363_main.py_root.png",
+        "className": "",
+        "start": "20:01:06.000000",
+        "Artifact_id": "18"
+    },
+    {
+        "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606450.8966389_qterminal_root.png",
+        "className": "",
+        "start": "20:00:50.000000",
+        "Artifact_id": "19"
+    },
+    {
+        "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/click_images/1604606463.6592674_qterminal_root.png",
+        "className": "",
+        "start": "20:01:03.000000",
+        "Artifact_id": "20"
+    },
+    {
+        "content": "[Control_L][Shift_L]Twget google.com[Return]wget amazon.com[Return]whoami[Return]exit[Return][Alt_L]",
+        "className": "Keypresses",
+        "start": "20:01:00.000000",
+        "Artifact_id": "21"
+    },
+    {
+        "content": "/home/kali/eceld-netsys/eceld/plugins/collectors/pykeylogger/raw/timed_screenshots/1604606461.0876677_screenshot.png",
+        "className": "",
+        "start": "20:01:01.000000",
+        "Artifact_id": "22"
+    },
+    {
+        "content": "41 p/s",
+        "className": "traffic",
+        "start": "20:00:53.000000",
+        "Artifact_id": "23"
+    },
+    {
+        "content": "57 p/s",
+        "className": "traffic",
+        "start": "20:00:56.000000",
+        "Artifact_id": "24"
+    },
+    {
+        "content": "13 p/s",
+        "className": "traffic",
+        "start": "20:00:57.000000",
+        "Artifact_id": "25"
+    },
+    {
+        "content": "",
+        "className": "trafficThroughput",
+        "start": "20:00:53.000000",
+        "Artifact_id": "26"
+    },
+    {
+        "content": "",
+        "className": "trafficThroughput",
+        "start": "20:00:56.000000",
+        "Artifact_id": "27"
+    },
+    {
+        "content": "",
+        "className": "trafficThroughput",
+        "start": "20:00:57.000000",
+        "Artifact_id": "28"
+    }
+]

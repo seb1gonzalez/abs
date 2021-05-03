@@ -46,23 +46,23 @@ class RelationshipExtractor(QThread):
             while index2 < len(artifact_list[index1]):
                 temp_key = list(artifact_list[index1][index2].keys())[0]
                 artifact_list[index1][index2]['Artifact_id'] = artifact_counter
-                if temp_key == 'traffic_xy_id':
-                    del artifact_list[index1][index2]['className']
-                elif temp_key == 'traffic_all_id':
-                    del artifact_list[index1][index2]['className']
-                elif temp_key == 'timed_id':
-                    del artifact_list[index1][index2]['classname']
-                    del artifact_list[index1][index2]['type']
-                elif temp_key == 'keypresses_id':
-                    del artifact_list[index1][index2]['className']
-                elif temp_key == 'clicks_id':
-                    del artifact_list[index1][index2]['classname']
-                    del artifact_list[index1][index2]['type']
-                elif temp_key == 'auditd_id':
-                    del artifact_list[index1][index2]['className']
-                else:
-                    print('A new dissector has been identified (' + temp_key + '), and requires implementation.')
-                del artifact_list[index1][index2][temp_key]
+                # if temp_key == 'traffic_xy_id':
+                #     del artifact_list[index1][index2]['className']
+                # elif temp_key == 'traffic_all_id':
+                #     del artifact_list[index1][index2]['className']
+                # elif temp_key == 'timed_id':
+                #     del artifact_list[index1][index2]['classname']
+                #     del artifact_list[index1][index2]['type']
+                # elif temp_key == 'keypresses_id':
+                #     del artifact_list[index1][index2]['className']
+                # elif temp_key == 'clicks_id':
+                #     del artifact_list[index1][index2]['classname']
+                #     del artifact_list[index1][index2]['type']
+                # elif temp_key == 'auditd_id':
+                #     del artifact_list[index1][index2]['className']
+                # else:
+                #     print('A new dissector has been identified (' + temp_key + '), and requires implementation.')
+                # del artifact_list[index1][index2][temp_key]
                 artifact_list[index1][index2]['start'] = artifact_list[index1][index2]['start'].replace('T', ' ')
                 try:
                     artifact_list[index1][index2]['start'] = dt.datetime.strptime(artifact_list[index1][index2]['start'], '%Y-%m-%d %H:%M:%S.%f') # If time contains milliseconds
