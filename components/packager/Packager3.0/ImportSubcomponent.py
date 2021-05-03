@@ -105,9 +105,9 @@ class ImportManager(QWidget):
         #self.vm_clear_butt.clicked.connect(self.clear_vm)
         #self.vm_clear_butt.setEnabled(False)
 
-        #self.import_butt = QPushButton("Start Importing Files")
-        #self.import_butt.clicked.connect(self.start_import)
-        #self.import_butt.setEnabled(False)
+        self.import_butt = QPushButton("Start Importing Files")
+        self.import_butt.clicked.connect(self.start_import)
+        self.import_butt.setEnabled(False)
 
         separator = QFrame()
         separator.setFrameShape(QFrame.HLine)
