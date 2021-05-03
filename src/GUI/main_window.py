@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import *
 from ConfigurationManager import ConfMng
 from Builder.Builder import Builder
 from RunnerComponent import RunnerApp
-from qt_material import apply_stylesheet
+# from qt_material import apply_stylesheet
 
 class tabdemo(QTabWidget):
    def __init__(self, parent = None):
@@ -29,8 +29,6 @@ class tabdemo(QTabWidget):
        tab1_layout.addWidget(extractor)
        self.tab1.setLayout(tab1_layout)
 
-
-		
    def builder_UI(self):
        tab2_layout = QVBoxLayout()
        builder = Builder(self)
@@ -46,7 +44,7 @@ class tabdemo(QTabWidget):
 		
 def main():
    app = QApplication(sys.argv)
-   apply_stylesheet(app, theme='dark_blue.xml')
+   # apply_stylesheet(app, theme='dark_blue.xml')
    ex = tabdemo()
    ex.show()
    sys.exit(app.exec_())
