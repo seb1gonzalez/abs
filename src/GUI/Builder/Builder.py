@@ -1,141 +1,134 @@
 import json
-from JSONTREE.qjsonmodel import QJsonModel
+import datetime
 import traceback
-
 import sys
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QMenuBar, QMenu, QAction, QWidget, QFileDialog, \
-     QTextEdit, QPushButton, QVBoxLayout, QGridLayout, QTreeView, QListView, QListWidget, QScrollArea, QComboBox
-from PyQt5.QtGui import QPixmap, QStandardItemModel, QStandardItem
-from PyQt5.QtCore import QDir
-from Builder.CausalRelationship import CausalRelationship
-# from BuilderTreeView import TreeviewBuilder
 
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-
-
 class Builder(QWidget):
     def __init__(self, parent):
         super().__init__(parent)
         try:
-
             self.button_import = QPushButton("Import")
             self.button_import.setMaximumWidth(80)
-
             self.button_save = QPushButton("Save")
             self.button_save.setMaximumWidth(80)
+            # self.button_undo = QPushButton("Undo")
+            # self.button_undo.setMaximumWidth(80)
+            self.button_undo_deleted_rows = QPushButton("Restore Rows")
+            self.button_undo_deleted_rows.setMaximumWidth(100)
 
-            self.button_undo = QPushButton("Undo")
-            self.button_undo.setMaximumWidth(80)
+            self.button_delta_time = QPushButton("Adjust Delta Time")
 
-            self.button_generate = QPushButton("Generate")
-            self.button_generate.setMaximumWidth(100)
+            self.button_generate = QPushButton("Export")
+            self.button_generate.setMaximumWidth(80)
+            self.button_delete = QPushButton("Delete Selected")
+            self.button_delete.setStyleSheet("background-color:#ff1744;")
+            self.button_delete.setMaximumWidth(100)
+
+            self.button_delta_time.setEnabled(False)
+            self.button_save.setEnabled(False)
             self.button_generate.setEnabled(False)
+            self.button_delete.setEnabled(False)
 
             self.button_import.clicked.connect(self.get_text_file)
-            self.button_generate.clicked.connect(self.generate_dependencies)
+            self.button_save.clicked.connect(self.save_feature)
+            self.button_delete.clicked.connect(self.delete_selected)
 
+            # self.button_generate.clicked.connect(self.generate_dependencies)
             self.document = None
-            self.causal_relationship = None
-            self.causal_dependency = None
+            self.casual_relationship = None
+            self.casual_dependency = None
             self.json_model = None
             self.json_tree_view = None
             self.data = None
+            self.removed_list = []
+            self.removed_index_list = []
+            self.model = None
 
-            self.hbox = QHBoxLayout()
-            self.vbox = QVBoxLayout()
+            self.buttons_HBOX = QHBoxLayout()
+            self.buttons_HBOX.addWidget(self.button_import)
+            self.buttons_HBOX.addWidget(self.button_save)
+            self.buttons_HBOX.addWidget(self.button_delta_time)
+            # self.buttons_HBOX.addWidget(self.button_undo)
+            self.buttons_HBOX.addWidget(self.button_generate)
+            self.buttons_HBOX.setAlignment(Qt.AlignTop)
 
-            self.hbox.addWidget(self.button_import)
-            self.hbox.addWidget(self.button_save)
-            self.hbox.addWidget(self.button_undo)
-            self.hbox.setAlignment(Qt.AlignTop)
-            self.hbox_rel_dep = QHBoxLayout()
+            self.search_label = QLabel('Search bar: ')
+            self.search_field = QLineEdit()
+            self.search_field.setEnabled(False)
+            self.search_field.setMaximumWidth(300)
+            self.buttons_HBOX.addWidget(self.search_label)
+            self.buttons_HBOX.addWidget(self.search_field)
+            self.buttons_HBOX.addStretch()
 
-            self.vbox_relationship = QVBoxLayout()
-            self.vbox_dependencies = QVBoxLayout()
+            self.relationships_VBOX = QVBoxLayout()
+            self.relationships_VBOX.setAlignment(Qt.AlignTop)
+            
+            
+            self.table = TableView()
+            self.table.setStyleSheet('subcontrol-position: left')
+            self.table.verticalHeader().setSectionResizeMode(QHeaderView.Interactive)
+            self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
-            self.hbox_rel_dep.addLayout(self.vbox_relationship)
-            self.hbox_rel_dep.addWidget(self.button_generate)
-            self.hbox_rel_dep.addLayout(self.vbox_dependencies)
-            self.hbox_rel_dep.setAlignment(Qt.AlignTop)
+            self.relationships_VBOX.addWidget(QLabel("Relationships"))
+            self.relationships_VBOX.addWidget(self.table)
+            under_table_HBOX = QHBoxLayout()
+            under_table_HBOX.addWidget(self.button_delete)
+            # under_table_HBOX.addWidget(self.button_undo_deleted_rows)
+            under_table_HBOX.addStretch()
 
-            self.scroll_left_area = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-            self.widget_scroll_left = QWidget()  # Widget that contains the collection of Vertical Box
-            self.vbox_scroll_left = QVBoxLayout()
+            self.relationships_VBOX.addLayout(under_table_HBOX)
 
-            # self.scroll_wid_left.setMinimumSize(300,700)
 
-            self.scroll_area_right = QScrollArea()  # Scroll Area which contains the widgets, set as the centralWidget
-            self.widget_scroll_right = QWidget()  # Widget that contains the collection of Vertical Box
-            self.vbox_scroll_right = QVBoxLayout()
-            # Scroll Area Properties
-            self.scroll_left_area.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-            self.scroll_left_area.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-            self.scroll_left_area.setWidgetResizable(True)
-
-            self.scroll_area_right.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-            self.scroll_area_right.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-            self.scroll_area_right.setWidgetResizable(True)
-
-            self.widget_scroll_left.setLayout(self.vbox_scroll_left)
-            self.scroll_left_area.setWidget(self.widget_scroll_left)
-            self.vbox_relationship.addWidget(self.scroll_left_area)
-
-            self.widget_scroll_right.setLayout(self.vbox_scroll_right)
-            self.scroll_area_right.setWidget(self.widget_scroll_right)
-            self.vbox_dependencies.addWidget(self.scroll_area_right)
-
-            self.vbox.addLayout(self.hbox)
-            self.vbox.addLayout(self.hbox_rel_dep)
-
-            self.setLayout(self.vbox)
+            self.main_content_VBOX = QVBoxLayout()
+            self.main_content_VBOX.setAlignment(Qt.AlignTop)
+            self.main_content_VBOX.addLayout(self.buttons_HBOX)
+            self.main_content_VBOX.addLayout(self.relationships_VBOX)
+            self.setLayout(self.main_content_VBOX)
+            
 
         except Exception:
             traceback.print_exc()
-    
-    def generate_dependencies(self):
-        try:
-            skip: list = CausalRelationship.deleted
-            for s in skip:
-                self.document[s] = False
-            with open('Builder/builder_out/builder_generated_dependencies.json', 'w') as outfile:
-                json.dump(self.document, outfile, indent=4,check_circular=True,sort_keys=True)
 
-            for i in range(len(self.document)):
-                self.data = self.document[i]
-                if self.data:
-                    self.json_model = QJsonModel()
-                    self.json_tree_view = QTreeView()
-                    self.json_tree_view.setModel(self.json_model)
-                    self.json_model.load(self.data)
-                    self.causal_dependency = CausalRelationship(self.json_tree_view,i,False)
-                    self.vbox_scroll_right.addWidget(self.causal_dependency)
-
-            self.widget_scroll_right.setLayout(self.vbox_scroll_right)
-            self.scroll_area_right.setWidget(self.widget_scroll_right)
-            self.vbox_dependencies.addWidget(self.scroll_area_right)
+    # def generate_dependencies(self):
+    #     try:
+    #         skip: list = CasualRelationship.deleted
+    #         for s in skip:
+    #             self.document[s] = False
+    #         for i in range(len(self.document)):
+    #             self.data = self.document[i]
+    #             if self.data:
+    #                 self.json_model = QJsonModel()
+    #                 self.json_tree_view = QTreeView()
+    #                 # self.json_tree_view.setModel(self.json_model)
+    #                 self.json_model.load(self.data)
+    #                 self.casual_dependency = CasualRelationship(self.json_tree_view, i, False)
+    #                 self.vbox_scroll_right.addWidget(self.casual_dependency)
+    #         self.widget_scroll_right.setLayout(self.vbox_scroll_right)
+    #         self.scroll_area_right.setWidget(self.widget_scroll_right)
+    #         self.dependencies_VBOX.addWidget(self.scroll_area_right)
+    #     except Exception:
+    #         traceback.print_exc()
 
 
-        except Exception as e:
-            print(e)
-            traceback.print_exc()
+    def undo_delete(self):
+
+        for index in self.removed_list:
+            print(index)
 
 
-    def leftScreen(self,document):
-        for i in range(len(self.document)):
-            self.data = self.document[i]
-            self.json_model = QJsonModel()
-            self.json_tree_view = QTreeView()
-            self.json_tree_view.setModel(self.json_model)
-            self.json_model.load(self.data)
-            self.causal_relationship:QWidget = CausalRelationship(self.json_tree_view, i)
-            self.vbox_scroll_left.addWidget(self.causal_relationship)
-        self.widget_scroll_left.setLayout(self.vbox_scroll_left)
-        self.scroll_left_area.setWidget(self.widget_scroll_left)
-        self.vbox_relationship.addWidget(self.scroll_left_area)
+    def delete_selected(self):
+        self.removed_list = self.table.selectionModel().selectedRows()
+
+        for model_index in self.table.selectionModel().selectedRows():
+            index = QPersistentModelIndex(model_index)
+            self.removed_index_list.append(index)
+
+        for index in self.removed_index_list:
+            self.model.removeRow(index.row())
+
 
 
     def get_text_file(self):
@@ -150,101 +143,144 @@ class Builder(QWidget):
                 with open(file_name[0]) as json_file:
                     self.document: dict = json.load(json_file)
                     json_file.close()
-                    self.better_relationships(self.document)
+                    # self.better_relationships(self.document)
                 try:
+
+                    # Adding the search feature
+                    self.search_feature()
+                    self.search_field.setEnabled(True)
+                    self.button_delta_time.setEnabled(True)
+                    self.button_save.setEnabled(True)
                     self.button_generate.setEnabled(True)
-                    self.leftScreen(self.document)
+                    self.button_delete.setEnabled(True)
+                    self.table.setModel(self.filter_proxy_model)
+
+
+
+                    self.button_generate.setEnabled(True)
 
                 except Exception:
                     traceback.print_exc()
 
-
             else:
                 pass
 
-    def better_relationships(self,json_data):
+    def better_relationships(self, json_data):
         try:
-            # store ID->relationship array
-            relationship_map = {}
-
-            # store ID -> data without Artifact relationships
-            data_key_map = {}
-
-            # final product
-            finale = []
-
             for element in json_data:
-                relationship_id = element["Artifact_id"]
-                relationship_arr = element["Artifact_Relationships"]
-                relationship_map[relationship_id] = relationship_arr
-                new_keys = {}
-
-                for data_key in element:
-                    if data_key == "Artifact_Relationships":
-                        continue
-                    else:
-                        new_keys[data_key] = element[data_key]
-
-                    data_key_map[relationship_id] = new_keys
-
-            # replace relationship ID with actual data
-            for key in relationship_map:
-                arr = relationship_map[key]
-                for i in range(len(arr)):
-                    rel = arr[i]
-                    data = data_key_map[rel]
-                    arr[i] = data
-
-            # for element in json_data:
-            #     id = element["Artifact_id"]
-            #     new_json_data = {}
-            #     data = data_key_map[id]
-            #     new_json_data[id] = data
-            #     finale.append(new_json_data)
-            #
-            # return finale
-
-
-
+                element_rel = []
+                relationships = element["Artifact_Relationships"]
+                for i in range(len(relationships)):
+                    rel = relationships[i]
+                    if isinstance(rel, int):
+                        r = json_data[rel]
+                        element_rel.append(r)
+                element["Artifact_Relationships"] = element_rel
 
         except Exception:
             traceback.print_exc()
 
+    def textchanged(self, text):
+        print("contents of text box: " + text)
+
     def search_feature(self):
-        # Appending all JSON values from dictionary into a 2D array list
-        self.array = []
+
+        # Gathering all keys from dictionary in a list
+        keys = []
         for i in range(len(self.document)):
-            if 'title' in self.document[i] and 'content' in self.document[i] and 'y' in self.document[i]:
-                self.array.append(
-                    [str(self.document[i]['Artifact_id']), self.document[i]['start'], self.document[i]['title'],
-                     self.document[i]['content'], self.document[i]['y']])
-            elif 'content' in self.document[i] and 'title' in self.document[i]:
-                self.array.append(
-                    [str(self.document[i]['Artifact_id']), self.document[i]['start'], self.document[i]['title'],
-                     self.document[i]['content'], ''])
-            elif 'content' in self.document[i]:
-                self.array.append(
-                    [str(self.document[i]['Artifact_id']), self.document[i]['start'], '', self.document[i]['content'],
-                     ''])
-            else:
-                self.array.append([str(self.document[i]['Artifact_id']), self.document[i]['start'], '', '', ''])
+            for key in self.document[i].keys():
+                if key not in keys:
+                    keys.append(key)
+
+        # 2D array that stores all values of the json artifacts
+        self.json_array = []
+        
+
+        # Inserting values into 2D array
+        for i in range(len(self.document)):
+            self.json_array.append([])
+            for j, key in enumerate(keys):
+                if key in self.document[i]:
+                    if key == "start":
+                        time : str = self.document[i][key]
+                        time = time.split(" ")
+                        time = time[1]
+                        self.document[i][key] = time
+
+                    self.json_array[i].append(str(self.document[i][key]))
+                else:
+                    self.json_array[i].append('')
 
         # Creating the standard model for filtering
-        self.model = QStandardItemModel(len(self.array), len(self.array[0]))
-        self.model.setHorizontalHeaderLabels(['Artifact ID', 'Start time', 'Title', 'Content', 'Y'])
+        self.model = QStandardItemModel(len(self.json_array), len(self.json_array[0]))
+        self.model.setHorizontalHeaderLabels(keys)
+
         # Inserting every item of the 2D array into the model an an Item object
-        for row in range(len(self.array)):
-            for col in range(len(self.array[i])):
-                self.item = QStandardItem(self.array[row][col])
-                self.model.setItem(row, col, self.item)
+        for row in range(len(self.json_array)):
+            for col in range(len(self.json_array[row])):
+                item = QStandardItem(self.json_array[row][col])
+                self.model.setItem(row, col, item)
+                  
+
         # Setting the Filter Proxy model for filtering data
         self.filter_proxy_model = QSortFilterProxyModel()
         self.filter_proxy_model.setSourceModel(self.model)
         self.filter_proxy_model.setFilterCaseSensitivity(Qt.CaseInsensitive)
         self.filter_proxy_model.setFilterKeyColumn(-1)
+
         # Adding the Search bar feature in the Layout
-        search_label = QLabel('Search bar: ')
-        self.search_field = QLineEdit()
         self.search_field.textChanged.connect(self.filter_proxy_model.setFilterRegExp)
-        self.hbox.addWidget(search_label)
-        self.hbox.addWidget(self.search_field)
+
+    def save_feature(self):
+            #Gathering all keys from dictionary in a list
+            self.keys = []
+            for i in range (len(self.document)):
+                for key in self.document[i].keys():
+                    if key not in keys:
+                        self.keys.append(key)
+            
+            saving_array = []
+            for row in range (len(self.json_array)):
+                saving_array.append([])
+                for col in range (len(self.json_array[row])):
+                    saving_array[row].append(self.model.item(row,col).text())
+            
+            
+            final_list = []
+            for row in range (len(saving_array)):
+                dic = {}
+                final_list.append(dic)
+                for col,key in enumerate(keys):
+                    final_list[row][key] = saving_array[row][col]
+            
+            #print(final_list[0]['y'])
+            with open('~/Documents/relationships_saved.json', 'w') as json_file:
+                json_format = json.dump(final_list, json_file)
+
+
+class TableView(QTableView):
+    def __init__(self,parent=None):
+        super(TableView, self).__init__(parent)
+
+        self.parent = parent
+        self.setDragEnabled(True)
+        self.setAcceptDrops(True)
+        self.setSelectionBehavior(self.SelectRows)  #Select whole rows
+        self.setAlternatingRowColors(True)
+        self.setDropIndicatorShown(True)
+        self.setDragDropOverwriteMode(False)
+        self.setDragDropMode(self.InternalMove)
+        # self.setMaximumHeight(900)
+
+
+
+# class TrashList(QTableWidget):
+#     def __init__(self,parent):
+#         super(TrashList, self).__init__(parent)
+#         self.setDragEnabled(True)
+#         self.setAcceptDrops(True)
+#         # self.setDragDropMode(self.DragDrop)
+#         self.setSelectionBehavior(self.SelectRows)  #Select whole rows
+#         # self.setSelectionMode(self.SingleSelection) # Only select/drag one row each time
+#         self.setDragDropOverwriteMode(False)        # Removes the original item after moving instead of clearing it
+
