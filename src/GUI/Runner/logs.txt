@@ -1,7 +1,2 @@
 DEBUG:root:addProjectItem(): retranslateUi(): instantiated
 DEBUG:root:addprojectItem(): retranslateUi(): Completed
-DEBUG:root:RunnerComponent.py(): Nothing to clear.
-DEBUG:root:RunnerComponent.py(): No script was specified.
-DEBUG:root:RunnerComponent.py(): Nothing to clear.
-DEBUG:root:RunnerComponent.py(): /home/kali/Desktop/abs/src/agent_builder/agent.py has been loaded.
-DEBUG:root:RunnerComponent.py(): Script Added.
