@@ -3,6 +3,7 @@ import json
 import logging
 import platform
 import zipfile
+import glob
 
 from PyQt5.QtCore import QThread, pyqtSignal
 
@@ -103,10 +104,18 @@ class ImportThread(QThread):
         if self.bool_file_list[0]:
             self.signal3.emit()
             try:
-                with zipfile.ZipFile(self.zip_file, 'r') as zip_ref:
-                    zip_ref.extractall('\\ImportedData')
-                self.signal1.emit()
-                self.signal3.emit()
+                #with zipfile.ZipFile(self.zip_file, 'r') as zip_ref:
+                #    zip_ref.extractall(os.getcwd() + "\\ImportedData")
+                #self.signal1.emit()
+                #self.signal3.emit()
+                os.system("tar -C /Users/peter/Desktop/abs/src/ImportedData -zxvf " + self.zip_file + " --strip-components=1")
+                for file in os.listdir("C:/Users/peter/Desktop/abs/src/ImportedData"):
+                    if file.endswith(".ova"):
+                        filename = file
+                print(filename)
+                os.chdir("/../../../../../../../Program Files/Oracle/VirtualBox/")  # change path for windows directory of vboxmanage executable
+                os.system("vboxmanage import C:/Users/peter/Desktop/abs/src/ImportedData/" + filename)
+                os.chdir("/../../../Users/peter/Desktop/abs/components/packager/Packager2.0") #change path for windows
             except:
                 self.signal2.emit()
                 self.signal3.emit()

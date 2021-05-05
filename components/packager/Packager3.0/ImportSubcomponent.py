@@ -5,7 +5,7 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QStyle, QFrame, QProgressBar
 
-from JSONFileDialog import JSONFileDialog
+#from JSONFileDialog import JSONFileDialog
 from JFileDialog import JFileDialog
 from ImportHandler import ImportThread
 
