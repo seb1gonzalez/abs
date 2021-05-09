@@ -410,7 +410,7 @@ class Builder(QWidget):
             show = self.error_pop.exec_()
             traceback.print_exc()
 
-
+# Undo - not integrated - crashes software
 class MyModel(QStandardItemModel):
     def __init__(self, list_data, parent=None):
         super(MyModel, self).__init__()
@@ -464,6 +464,7 @@ class MyModel(QStandardItemModel):
     def flags(self, index):
         return Qt.ItemIsEditable | Qt.ItemIsEnabled | Qt.ItemIsSelectable | Qt.ItemIsUserCheckable
 
+# Undo
 class CellEdit(QUndoCommand):
 
     def __init__(self, index, value, model):
@@ -479,17 +480,17 @@ class CellEdit(QUndoCommand):
     def redo(self):
         self.model.list_data[self.index.row()][self.index.column()] = self.value
 
+
 class TableView(QTableView):
     def __init__(self, parent=None):
         super(TableView, self).__init__(parent)
         self.parent = parent
         self.setDragEnabled(True)
-        # self.setAcceptDrops(True)
         self.setSelectionBehavior(self.SelectRows)  # Select whole rows
         self.setAlternatingRowColors(True)
         self.setDropIndicatorShown(True)
         self.setDragDropOverwriteMode(False)
         self.setDragDropMode(self.InternalMove)
-        # self.setMaximumHeight(900)
+
 
 
